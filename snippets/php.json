@@ -1,0 +1,9 @@
+{
+  "tinker": {
+    "prefix": "tinker",
+    "body": [
+      "eval(\\Psy\\sh());\n"
+    ],
+    "description": "PsyShell"
+  }
+}
