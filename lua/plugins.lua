@@ -14,7 +14,6 @@ end
 -- Boostrap Packer
 local packer_bootstrap = ensure_packer()
 
-
 -- Rerun PackerCompile everytime plugins.lua is updated
 cmd([[
   augroup packer_user_config
@@ -23,7 +22,7 @@ cmd([[
   augroup end
 ]])
 
-return require('packer').startup({function(use)
+return require('packer').startup({ function(use)
 
   use({ 'wbthomason/packer.nvim', opt = true })
 
@@ -118,22 +117,37 @@ return require('packer').startup({function(use)
   }
 
   use {
-      'ahmedkhalf/project.nvim',
-      config = function() require('plugins.project') end
+    'ahmedkhalf/project.nvim',
+    config = function() require('plugins.project') end
   }
 
-  use("matze/vim-move") 
+  use("matze/vim-move")
 
   use {
     'jose-elias-alvarez/null-ls.nvim',
-     config = function() require('plugins.null-ls') end
+    config = function() require('plugins.null-ls') end
   }
+
+  use {
+    'kevinhwang91/nvim-ufo',
+    requires = 'kevinhwang91/promise-async',
+    config = function()
+      vim.o.foldcolumn = '1' -- '0' is not bad
+      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+      vim.o.foldlevelstart = 99
+      vim.o.foldenable = true
+    end
+  }
+
+
+  use("farmergreg/vim-lastplace")
   if packer_bootstrap then
     require('packer').sync()
   end
 end,
-config = {
-  display = {
-    open_fn = require('packer.util').float,
-  }}
+  config = {
+    display = {
+      open_fn = require('packer.util').float,
+    }
+  }
 })
