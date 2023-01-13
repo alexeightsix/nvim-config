@@ -141,6 +141,14 @@ return require('packer').startup({ function(use)
 
 
   use("farmergreg/vim-lastplace")
+ 
+use {
+    'goolord/alpha-nvim',
+    config = function ()
+        require'alpha'.setup(require'alpha.themes.dashboard'.config)
+    end
+}
+
   if packer_bootstrap then
     require('packer').sync()
   end

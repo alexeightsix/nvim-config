@@ -8,6 +8,11 @@ vim.opt.termguicolors = true
 
 -- OR setup with some options
 require("nvim-tree").setup({
+  update_focused_file = {
+        enable = true,
+        update_root = true,
+        ignore_list = {},
+  },
   sort_by = "case_sensitive",
   view = {
     adaptive_size = true,

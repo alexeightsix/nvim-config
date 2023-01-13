@@ -28,7 +28,7 @@ local wk = require("which-key")
 local telescope = require("telescope")
 
 wk.register({
-  ["<leader>r"] = {
+  ["<leader>f"] = {
     ["p"] = { telescope.extensions.projects.projects, "Projects" },
   },
 })
