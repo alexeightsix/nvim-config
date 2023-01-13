@@ -14,8 +14,6 @@ end
 -- Boostrap Packer
 local packer_bootstrap = ensure_packer()
 
--- Load Packer
-cmd([[packadd packer.nvim]])
 
 -- Rerun PackerCompile everytime plugins.lua is updated
 cmd([[
@@ -25,10 +23,10 @@ cmd([[
   augroup end
 ]])
 
-return require('packer').startup(function(use)
+return require('packer').startup({function(use)
 
   use({ 'wbthomason/packer.nvim', opt = true })
-  
+
   use({ 'Mofiqul/dracula.nvim' })
 
   use {
@@ -124,9 +122,18 @@ return require('packer').startup(function(use)
       config = function() require('plugins.project') end
   }
 
+  use("matze/vim-move") 
+
   use {
     'jose-elias-alvarez/null-ls.nvim',
      config = function() require('plugins.null-ls') end
   }
-
-end)
+  if packer_bootstrap then
+    require('packer').sync()
+  end
+end,
+config = {
+  display = {
+    open_fn = require('packer.util').float,
+  }}
+})
