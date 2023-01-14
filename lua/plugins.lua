@@ -26,7 +26,11 @@ return require('packer').startup({ function(use)
 
   use({ 'wbthomason/packer.nvim', opt = true })
 
-  use({ 'Mofiqul/dracula.nvim' })
+  use({ 'Mofiqul/dracula.nvim',
+    config = function()
+      vim.cmd [[colorscheme dracula]]
+    end
+  })
 
   use {
     'nvim-lualine/lualine.nvim',
@@ -141,14 +145,31 @@ return require('packer').startup({ function(use)
 
 
   use("farmergreg/vim-lastplace")
- 
-use {
-    'goolord/alpha-nvim',
-    config = function ()
-        require'alpha'.setup(require'alpha.themes.dashboard'.config)
-    end
-}
 
+  use {
+    'goolord/alpha-nvim',
+    config = function()
+      require('plugins.alpha')
+
+    end
+  }
+
+  use {
+    'petertriho/nvim-scrollbar',
+    config = function()
+      require("plugins.scrollbar")
+    end
+  }
+
+  use {
+    'justinmk/vim-sneak'
+  }
+  use {
+    'rmagatti/auto-session',
+    config = function()
+      require('plugins.auto-session')
+    end
+  }
   if packer_bootstrap then
     require('packer').sync()
   end

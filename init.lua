@@ -1,5 +1,4 @@
 require('plugins')
 require('options')
-require('theme')
 require('keys')
 require('auto')
