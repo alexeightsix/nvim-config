@@ -11,10 +11,8 @@ local ensure_packer = function()
   return false
 end
 
--- Boostrap Packer
 local packer_bootstrap = ensure_packer()
 
--- Rerun PackerCompile everytime plugins.lua is updated
 cmd([[
   augroup packer_user_config
     autocmd!
@@ -143,14 +141,12 @@ return require('packer').startup({ function(use)
     end
   }
 
-
   use("farmergreg/vim-lastplace")
 
   use {
     'goolord/alpha-nvim',
     config = function()
       require('plugins.alpha')
-
     end
   }
 
@@ -161,16 +157,25 @@ return require('packer').startup({ function(use)
     end
   }
 
-  use {
-    'justinmk/vim-sneak'
-  }
+  use('justinmk/vim-sneak')
+
+use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+require('plugins.toggle-term')
+end}
+
+
   use {
     'rmagatti/auto-session',
     config = function()
       require('plugins.auto-session')
     end
   }
-  if packer_bootstrap then
+
+use{
+'mg979/vim-visual-multi',
+}
+
+if packer_bootstrap then
     require('packer').sync()
   end
 end,
