@@ -57,7 +57,7 @@ return require('packer').startup({ function(use)
     'nvim-tree/nvim-tree.lua',
     config = function() require('plugins.nvim_tree') end,
     requires = {
-      'nvim-tree/nvim-web-devicons', -- optional, for file icons
+      'nvim-tree/nvim-web-devicons',
     }
   }
 
@@ -111,8 +111,6 @@ return require('packer').startup({ function(use)
     }
   }
 
-  use("kyazdani42/nvim-web-devicons");
-
   use {
     "folke/trouble.nvim",
     config = function() require("plugins.trouble") end
@@ -159,9 +157,9 @@ return require('packer').startup({ function(use)
 
   use('justinmk/vim-sneak')
 
-use {"akinsho/toggleterm.nvim", tag = '*', config = function()
-require('plugins.toggle-term')
-end}
+  use { "akinsho/toggleterm.nvim", tag = '*', config = function()
+    require('plugins.toggle-term')
+  end }
 
 
   use {
@@ -171,11 +169,20 @@ end}
     end
   }
 
-use{
-'mg979/vim-visual-multi',
-}
+  use {
+    'mg979/vim-visual-multi',
+  }
 
-if packer_bootstrap then
+  use {
+
+    'vim-test/vim-test',
+    config = function()
+      require('plugins.vim-test')
+    end
+
+  }
+
+  if packer_bootstrap then
     require('packer').sync()
   end
 end,
