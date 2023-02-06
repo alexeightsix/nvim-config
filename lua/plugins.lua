@@ -128,17 +128,6 @@ return require('packer').startup({ function(use)
     config = function() require('plugins.null-ls') end
   }
 
-  use {
-    'kevinhwang91/nvim-ufo',
-    requires = 'kevinhwang91/promise-async',
-    config = function()
-      vim.o.foldcolumn = '1' -- '0' is not bad
-      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-      vim.o.foldlevelstart = 99
-      vim.o.foldenable = true
-    end
-  }
-
   use("farmergreg/vim-lastplace")
 
   use {
@@ -155,13 +144,6 @@ return require('packer').startup({ function(use)
     end
   }
 
-  use('justinmk/vim-sneak')
-
-  use { "akinsho/toggleterm.nvim", tag = '*', config = function()
-    require('plugins.toggle-term')
-  end }
-
-
   use {
     'rmagatti/auto-session',
     config = function()
@@ -174,12 +156,17 @@ return require('packer').startup({ function(use)
   }
 
   use {
-
     'vim-test/vim-test',
     config = function()
       require('plugins.vim-test')
     end
+  }
 
+  use {
+    'yamatsum/nvim-cursorline',
+    config = function()
+      require('nvim-cursorline')
+    end
   }
 
   if packer_bootstrap then
