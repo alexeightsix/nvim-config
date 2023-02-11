@@ -10,6 +10,8 @@ vim.keymap.set("n", "<leader>fc", "<CMD>Telescope commands<CR>")
 vim.keymap.set("n", "<leader>fsy", "<CMD>Telescope lsp_document_symbols<CR>")
 vim.keymap.set("n", "<leader>lp", "<CMD>Telescope resume<CR>")
 
+vim.keymap.set("n", "<leader>fp", "<CMD>Telescope projects<CR>")
+
 -- format document
 vim.keymap.set("n", "<leader>fd", "<CMD>LspZeroFormat<CR>")
 
@@ -17,7 +19,7 @@ vim.keymap.set("n", "<leader>fd", "<CMD>LspZeroFormat<CR>")
 vim.keymap.set('n', '<leader>x', ':!%:p<CR>')
 
 -- buffer
-vim.keymap.set("n", "<S-Tab>", "<CMD>:BufferPreviou<CR>")
+vim.keymap.set("n", "<S-Tab>", "<CMD>:BufferPrevious<CR>")
 vim.keymap.set("n", "<leader>fb", "<CMD>Telescope buffers<CR>")
 
 -- sidebar
@@ -29,11 +31,3 @@ vim.keymap.set('n', '<leader>ut', "<CMD>:UndotreeToggle<CR>")
 -- open neovim config
 vim.keymap.set('n', '<leader>nc', "<CMD>:edit $MYVIMRC<CR><CMD>:e $MYVIMRC<CR>")
 
-local wk = require("which-key")
-local telescope = require("telescope")
-
-wk.register({
-  ["<leader>f"] = {
-    ["p"] = { telescope.extensions.projects.projects, "Projects" },
-  },
-})
