@@ -167,7 +167,7 @@ return require('packer').startup({ function(use)
       require('nvim-cursorline')
     end
   }
-
+use('editorconfig/editorconfig-vim')
   if packer_bootstrap then
     require('packer').sync()
   end
