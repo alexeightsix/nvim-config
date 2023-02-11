@@ -22,25 +22,42 @@ cmd([[
 
 return require('packer').startup({ function(use)
 
+  -- A use-package inspired plugin manager for Neovim.
+  -- Uses native packages, supports Luarocks dependencies,
+  -- written in Lua, allows for expressive config
   use({ 'wbthomason/packer.nvim', opt = true })
 
+  use({
+    'lewis6991/impatient.nvim',
+    config = function()
+      require('impatient')
+    end
+  })
+
+  -- Dracula colorscheme for neovim written in Lua
   use({ 'Mofiqul/dracula.nvim',
     config = function()
       vim.cmd [[colorscheme dracula]]
     end
   })
 
+  -- A blazing fast and easy to configure neovim statusline
+  -- plugin written in pure lua.
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
     config = function() require('plugins.lualine') end
   }
 
+  -- Find, Filter, Preview, Pick. All lua, all the time.
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.x',
     requires = { { 'nvim-lua/plenary.nvim' } },
   }
 
+  -- boom Create key bindings that stick. WhichKey is a lua
+  -- plugin for Neovim 0.5 that displays a popup with possible
+  -- keybindings of the command you started typing.
   use {
     "folke/which-key.nvim",
     config = function() require('plugins.whichkey') end
@@ -131,13 +148,6 @@ return require('packer').startup({ function(use)
   use("farmergreg/vim-lastplace")
 
   use {
-    'goolord/alpha-nvim',
-    config = function()
-      require('plugins.alpha')
-    end
-  }
-
-  use {
     'petertriho/nvim-scrollbar',
     config = function()
       require("plugins.scrollbar")
@@ -148,17 +158,6 @@ return require('packer').startup({ function(use)
     'rmagatti/auto-session',
     config = function()
       require('plugins.auto-session')
-    end
-  }
-
-  use {
-    'mg979/vim-visual-multi',
-  }
-
-  use {
-    'vim-test/vim-test',
-    config = function()
-      require('plugins.vim-test')
     end
   }
 
@@ -175,7 +174,7 @@ return require('packer').startup({ function(use)
 end,
   config = {
     display = {
-      open_fn = require('packer.util').float,
+      open_fn = require('packer.util').float
     }
   }
 })
