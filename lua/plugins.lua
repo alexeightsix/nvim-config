@@ -36,7 +36,6 @@ return require("packer").startup({
     })
 
     use("nvim-tree/nvim-web-devicons")
-    
     -- Dracula colorscheme for neovim written in Lua
     use({
       "Mofiqul/dracula.nvim",
@@ -71,7 +70,6 @@ return require("packer").startup({
         require("plugins.whichkey")
       end,
     })
-
 
     use({ "romgrk/barbar.nvim", requires = "nvim-web-devicons" })
 
@@ -125,6 +123,7 @@ return require("packer").startup({
     })
 
     use({
+      branch = "v1.x",
       "VonHeikemen/lsp-zero.nvim",
       config = function()
         require("plugins.lsp-zero")

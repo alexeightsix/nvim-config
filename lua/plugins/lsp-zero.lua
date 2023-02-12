@@ -12,7 +12,6 @@ lsp.ensure_installed({
   'intelephense',
   'jsonls',
   'pyright',
-  'sumneko_lua',
   'tailwindcss',
   'theme_check',
   'tsserver',
