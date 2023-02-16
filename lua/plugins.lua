@@ -74,7 +74,7 @@ require("lazy").setup({
     },
   },
 
-  { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" },
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
   { "mbbill/undotree" },
 
