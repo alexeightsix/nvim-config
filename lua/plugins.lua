@@ -59,7 +59,7 @@ require("lazy").setup({
     config = function()
       require("plugins.whichkey")
     end,
-    lazy = true,
+    lazy = false 
   },
 
   { "romgrk/barbar.nvim", dependencies = "nvim-web-devicons" },
