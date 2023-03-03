@@ -14,6 +14,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  "theprimeagen/vim-be-good",
   -- Improve startup time for Neovim
   {
     priority = 4000,
@@ -59,10 +60,10 @@ require("lazy").setup({
     config = function()
       require("plugins.whichkey")
     end,
-    lazy = false 
+    lazy = false,
   },
 
-  { "romgrk/barbar.nvim", dependencies = "nvim-web-devicons" },
+  { "romgrk/barbar.nvim",              dependencies = "nvim-web-devicons" },
 
   {
     "nvim-tree/nvim-tree.lua",
@@ -76,14 +77,7 @@ require("lazy").setup({
 
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
-  { "mbbill/undotree" },
-
-  {
-    "windwp/nvim-autopairs",
-    config = function()
-      require("plugins.autopairs")
-    end,
-  },
+  "mbbill/undotree",
 
   {
     "lewis6991/gitsigns.nvim",

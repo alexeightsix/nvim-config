@@ -1,0 +1,17 @@
+curl
+docker 
+docker-compose
+fd
+fzf
+git
+go 
+lua 
+neovim
+nodejs
+npm
+php
+python
+ripgrep
+rustup
+stylua
+wget
