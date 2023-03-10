@@ -1,7 +1,3 @@
--- leader
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- lsp 
 vim.keymap.set("n", 'gd', "<CMD>lua vim.lsp.buf.definition()<CR>")
 vim.keymap.set("n", "<leader>fd", "<CMD>LspZeroFormat<CR>")
@@ -22,9 +18,11 @@ vim.keymap.set("n", "<leader>fb", "<CMD>Telescope buffers<CR>")
 -- sidebar
 vim.keymap.set('n', "<leader>e", "<CMD>:NvimTreeToggle<CR>")
 
+-- trouble
+vim.keymap.set('n', "<leader>tt", "<CMD>:TroubleToggle<CR>")
+
 -- undotree
 vim.keymap.set('n', '<leader>ut', "<CMD>:UndotreeToggle<CR>")
 
 -- open neovim config
 vim.keymap.set('n', '<leader>nc', "<CMD>:edit $MYVIMRC<CR><CMD>:e $MYVIMRC<CR>")
-

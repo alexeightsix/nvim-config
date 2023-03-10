@@ -1,3 +1,8 @@
+-- leader
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
@@ -33,7 +38,6 @@ require("lazy").setup({
     end,
     lazy = false,
   },
-
   -- A blazing fast and easy to configure neovim statusline
   -- plugin written in pure lua.
   {
@@ -43,7 +47,6 @@ require("lazy").setup({
       require("plugins.lualine")
     end,
   },
-
   -- Find, Filter, Preview, Pick. All lua, all the time.
   {
     "nvim-telescope/telescope.nvim",
@@ -54,16 +57,7 @@ require("lazy").setup({
   -- boom Create key bindings that stick. WhichKey is a lua
   -- plugin for Neovim 0.5 that displays a popup with possible
   -- keybindings of the command you started typing.
-  {
-    "folke/which-key.nvim",
-    config = function()
-      require("plugins.whichkey")
-    end,
-    lazy = false 
-  },
-
   { "romgrk/barbar.nvim", dependencies = "nvim-web-devicons" },
-
   {
     "nvim-tree/nvim-tree.lua",
     config = function()
@@ -73,46 +67,32 @@ require("lazy").setup({
       "nvim-tree/nvim-web-devicons",
     },
   },
-
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-
   { "mbbill/undotree" },
-
-  {
-    "windwp/nvim-autopairs",
-    config = function()
-      require("plugins.autopairs")
-    end,
-  },
-
   {
     "lewis6991/gitsigns.nvim",
     config = function()
       require("plugins.gitsigns")
     end,
   },
-
   {
     "lukas-reineke/indent-blankline.nvim",
     config = function()
       require("plugins.blanklines")
     end,
   },
-
   {
     "numToStr/Comment.nvim",
     config = function()
       require("plugins.comment")
     end,
   },
-
   {
     "RRethy/vim-illuminate",
     config = function()
       require("plugins.illuminate")
     end,
   },
-
   {
     branch = "v1.x",
     "VonHeikemen/lsp-zero.nvim",
@@ -134,46 +114,38 @@ require("lazy").setup({
       { "williamboman/mason.nvim" },
     },
   },
-
   {
     "folke/trouble.nvim",
     config = function()
       require("plugins.trouble")
     end,
   },
-
   {
     "ahmedkhalf/project.nvim",
     config = function()
       require("plugins.project")
     end,
   },
-
   "matze/vim-move",
-
   {
     "jose-elias-alvarez/null-ls.nvim",
     config = function()
       require("plugins.null-ls")
     end,
   },
-
   { "farmergreg/vim-lastplace" },
-
   {
     "petertriho/nvim-scrollbar",
     config = function()
       require("plugins.scrollbar")
     end,
   },
-
   {
     "rmagatti/auto-session",
     config = function()
       require("plugins.auto-session")
     end,
   },
-
   {
     "yamatsum/nvim-cursorline",
     config = function()
