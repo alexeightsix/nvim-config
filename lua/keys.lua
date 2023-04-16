@@ -10,7 +10,7 @@ vim.keymap.set("n", "<leader>ff", "<CMD>Telescope find_files<CR>")
 vim.keymap.set("n", "<leader>of", "<CMD>Telescope oldfiles<CR>")
 vim.keymap.set("n", "<leader>fw", "<CMD>Telescope live_grep<CR>")
 vim.keymap.set("n", "<leader>fc", "<CMD>Telescope commands<CR>")
-vim.keymap.set("n", "<leader>fsy", "<CMD>Telescope lsp_document_symbols<CR>")
+vim.keymap.set("n", "<leader>ds", "<CMD>Telescope lsp_document_symbols<CR>")
 vim.keymap.set("n", "<leader>fb", "<CMD>Telescope buffers<CR>")
 
 -- buffer
