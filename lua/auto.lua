@@ -1,16 +1,16 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
-local yank_group = augroup('HighlightYank', {})
+local yank_group = augroup("HighlightYank", {})
 
-autocmd('TextYankPost', {
-    group = yank_group,
-    pattern = '*',
-    callback = function()
-        vim.highlight.on_yank({
-            higroup = 'IncSearch',
-            timeout = 100,
-        })
-    end,
+autocmd("TextYankPost", {
+  group = yank_group,
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank({
+      higroup = "IncSearch",
+      timeout = 100,
+    })
+  end,
 })
 
 local function exists(file)
@@ -37,7 +37,10 @@ vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     local a = vim.fn.expand("%")
     if is_dir(a) or a == "." then
-      return require("telescope.builtin").find_files({})
+      require("telescope.builtin").oldfiles({
+        only_cwd = true,
+        initial_mode = "normal",
+      })
     end
   end,
 })
