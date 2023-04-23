@@ -11,8 +11,6 @@ require("nvim-tree").setup({
         enable = true,
         auto_open = false,
   },
-  open_on_setup_file = false,
-	open_on_setup = false,
 	git = {
 		enable = true,
 		ignore = false,
@@ -24,14 +22,6 @@ require("nvim-tree").setup({
 		ignore_list = {},
 	},
 	sort_by = "case_sensitive",
-	view = {
-		adaptive_size = true,
-		mappings = {
-			list = {
-				{ key = "u", action = "dir_up" },
-			},
-		},
-	},
 	renderer = {
 		group_empty = true,
 	},
