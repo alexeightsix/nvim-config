@@ -2,7 +2,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
@@ -54,6 +53,9 @@ require("lazy").setup({
     version = "0.1.x",
     dependencies = { { "nvim-lua/plenary.nvim" } },
     lazy = false,
+    config = function()
+      require("plugins.telescope")
+    end,
   },
   -- boom Create key bindings that stick. WhichKey is a lua
   -- plugin for Neovim 0.5 that displays a popup with possible
@@ -158,6 +160,12 @@ require("lazy").setup({
     "github/copilot.vim",
     config = function()
       require("plugins.copilot")
+    end,
+  },
+  {
+    "NvChad/nvim-colorizer.lua",
+    config = function()
+      require("plugins.colorizer")
     end,
   },
 })
