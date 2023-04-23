@@ -168,4 +168,5 @@ require("lazy").setup({
       require("plugins.colorizer")
     end,
   },
+  { "onsails/lspkind.nvim" },
 })
