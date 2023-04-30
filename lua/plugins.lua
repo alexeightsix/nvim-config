@@ -129,7 +129,6 @@ require("lazy").setup({
       require("plugins.project")
     end,
   },
-  "matze/vim-move",
   {
     "jose-elias-alvarez/null-ls.nvim",
     config = function()
