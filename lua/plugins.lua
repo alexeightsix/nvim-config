@@ -60,7 +60,10 @@ require("lazy").setup({
   -- boom Create key bindings that stick. WhichKey is a lua
   -- plugin for Neovim 0.5 that displays a popup with possible
   -- keybindings of the command you started typing.
-  { "romgrk/barbar.nvim", dependencies = "nvim-web-devicons" },
+  {
+    "romgrk/barbar.nvim",
+    dependencies = "nvim-web-devicons",
+  },
   {
     "nvim-tree/nvim-tree.lua",
     config = function()
@@ -169,4 +172,16 @@ require("lazy").setup({
     end,
   },
   { "onsails/lspkind.nvim" },
+  {
+    "jackMort/ChatGPT.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("plugins.chatgpt")
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+  },
 })

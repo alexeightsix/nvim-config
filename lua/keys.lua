@@ -15,6 +15,21 @@ vim.keymap.set("n", "<leader>ff", function()
   end
 end)
 
+vim.keymap.set("n", "<leader>faf", function()
+  telescope.find_files({
+    no_ignore = true,
+    hidden = true,
+  })
+end)
+
+vim.keymap.set("n", "<leader>faw", function()
+  telescope.live_grep({
+    no_ignore = true,
+    hidden = true,
+  })
+end)
+
+
 vim.keymap.set("n", "<leader>of", function()
   telescope.oldfiles({
     only_cwd = true,
@@ -53,8 +68,3 @@ vim.keymap.set("n", "<leader>ut", "<CMD>:UndotreeToggle<CR>")
 
 -- open neovim config
 vim.keymap.set("n", "<leader>nc", "<CMD>:edit $MYVIMRC<CR><CMD>:e $MYVIMRC<CR>")
-
-
-
-
-
