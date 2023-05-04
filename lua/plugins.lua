@@ -172,6 +172,12 @@ require("lazy").setup({
 		end,
 	},
 	{ "onsails/lspkind.nvim" },
+  {
+    "ray-x/lsp_signature.nvim",
+    config = function()
+      require("plugins.lsp_signature")
+    end,
+  },
 	{
 		"jackMort/ChatGPT.nvim",
 		event = "VeryLazy",
