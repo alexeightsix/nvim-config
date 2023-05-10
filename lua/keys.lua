@@ -1,8 +1,11 @@
 local telescope = require("telescope.builtin")
+local lsp = require("lsp-zero")
 
--- lsp
-vim.keymap.set("n", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>")
-vim.keymap.set("n", "<leader>fd", "<CMD>LspZeroFormat<CR>")
+lsp.on_attach(function()
+  vim.keymap.set("n", "<leader>ds", "<CMD>Telescope lsp_document_symbols<CR>")
+  vim.keymap.set("n", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>")
+  vim.keymap.set("n", "<leader>fd", "<CMD>LspZeroFormat<CR>")
+end)
 
 vim.keymap.set("n", "<leader>ff", function()
   vim.fn.system("git rev-parse --is-inside-work-tree")
@@ -29,7 +32,6 @@ vim.keymap.set("n", "<leader>faw", function()
   })
 end)
 
-
 vim.keymap.set("n", "<leader>of", function()
   telescope.oldfiles({
     only_cwd = true,
@@ -51,7 +53,6 @@ end)
 
 vim.keymap.set("n", "<leader>fw", "<CMD>Telescope live_grep<CR>")
 vim.keymap.set("n", "<leader>fc", "<CMD>Telescope commands<CR>")
-vim.keymap.set("n", "<leader>ds", "<CMD>Telescope lsp_document_symbols<CR>")
 vim.keymap.set("n", "<leader>fb", "<CMD>Telescope buffers<CR>")
 
 -- buffer
@@ -68,3 +69,8 @@ vim.keymap.set("n", "<leader>ut", "<CMD>:UndotreeToggle<CR>")
 
 -- open neovim config
 vim.keymap.set("n", "<leader>nc", "<CMD>:edit $MYVIMRC<CR><CMD>:e $MYVIMRC<CR>")
+
+-- copilot
+vim.api.nvim_set_keymap("i", "<C-A-Up>", "<Plug>(copilot-next)", { noremap = false, silent = true })
+vim.api.nvim_set_keymap("i", "<C-A-Down>", "<Plug>(copilot-previous)", { noremap = false, silent = true })
+vim.api.nvim_set_keymap("i", "<C-A-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
