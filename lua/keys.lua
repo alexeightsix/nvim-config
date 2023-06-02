@@ -66,6 +66,7 @@ vim.keymap.set("n", "<leader>tt", "<CMD>:TroubleToggle<CR>")
 
 --git 
 vim.keymap.set("n", "<leader>td", "<CMD>Gitsigns toggle_deleted<CR>")
+vim.keymap.set("n", "<leader>bl", "<CMD>Gitsigns blame_line<CR>")
 
 -- undotree
 vim.keymap.set("n", "<leader>ut", "<CMD>:UndotreeToggle<CR>")
