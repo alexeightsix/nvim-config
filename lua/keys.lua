@@ -67,7 +67,27 @@ vim.keymap.set("n", "<leader>e", "<CMD>:NvimTreeToggle<CR>")
 -- trouble
 vim.keymap.set("n", "<leader>tt", "<CMD>:TroubleToggle<CR>")
 
---git 
+-- testing
+vim.keymap.set("n", "<leader>tn", "<CMD>:TestNearest<CR>")
+vim.keymap.set("n", "<leader>tf", "<CMD>:TestFile<CR>")
+vim.keymap.set("n", "<leader>tl", "<CMD>:TestLast<CR>")
+vim.keymap.set("n", "<leader>tc", "<CMD>:TestClass<CR>")
+vim.keymap.set("n", "<leader>tv", "<CMD>:TestVisit<CR>")
+
+-- debugger
+vim.keymap.set("n", "<leader>x", function()
+  require("dap").continue()
+end)
+
+vim.keymap.set("n", "<leader>db", function()
+  require("dapui").toggle({})
+end)
+
+vim.keymap.set("n", "<leader>bp", function()
+  require("dap").toggle_breakpoint()
+end)
+
+--git
 vim.keymap.set("n", "<leader>td", "<CMD>Gitsigns toggle_deleted<CR>")
 vim.keymap.set("n", "<leader>bl", "<CMD>Gitsigns blame_line<CR>")
 

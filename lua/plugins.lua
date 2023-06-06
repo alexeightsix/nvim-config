@@ -190,5 +190,17 @@ require("lazy").setup({
       "nvim-telescope/telescope.nvim",
     },
   },
-  { "sindrets/diffview.nvim" },
+  "sindrets/diffview.nvim",
+  "vim-test/vim-test",
+  {
+    "rcarriga/nvim-dap-ui",
+    config = function()
+      require("plugins.dap")
+    end,
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "leoluz/nvim-dap-go",
+      "theHamsta/nvim-dap-virtual-text",
+    },
+  },
 })
