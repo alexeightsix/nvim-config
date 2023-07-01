@@ -53,19 +53,6 @@ require("lazy").setup({
     end,
   },
   {
-    "romgrk/barbar.nvim",
-    opts = {
-      clickable = false,
-      icons = {
-        button = false,
-        filetype = {
-          enabled = false,
-        },
-      },
-    },
-    dependencies = "nvim-web-devicons",
-  },
-  {
     "nvim-tree/nvim-tree.lua",
     config = function()
       require("plugins.nvim_tree")
@@ -120,12 +107,6 @@ require("lazy").setup({
       { "williamboman/mason-lspconfig.nvim" },
       { "williamboman/mason.nvim" },
     },
-  },
-  {
-    "folke/trouble.nvim",
-    config = function()
-      require("plugins.trouble")
-    end,
   },
   {
     "ahmedkhalf/project.nvim",
@@ -191,16 +172,4 @@ require("lazy").setup({
     },
   },
   "sindrets/diffview.nvim",
-  "vim-test/vim-test",
-  {
-    "rcarriga/nvim-dap-ui",
-    config = function()
-      require("plugins.dap")
-    end,
-    dependencies = {
-      "mfussenegger/nvim-dap",
-      "leoluz/nvim-dap-go",
-      "theHamsta/nvim-dap-virtual-text",
-    },
-  },
 })

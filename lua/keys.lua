@@ -21,6 +21,16 @@ vim.keymap.set("n", "<leader>ff", function()
   end
 end)
 
+vim.keymap.set("n", "<leader>tt", function()
+  telescope.diagnostics(require("telescope.themes").get_dropdown({
+    initial_mode = "normal",
+    layout_config = {
+      width = 0.9,
+      height= 0.3,
+    },
+  }))
+end)
+
 vim.keymap.set("n", "<leader>faf", function()
   telescope.find_files({
     no_ignore = true,
@@ -63,29 +73,6 @@ vim.keymap.set("n", "<S-Tab>", "<CMD>:BufferPrevious<CR>")
 
 -- sidebar
 vim.keymap.set("n", "<leader>e", "<CMD>:NvimTreeToggle<CR>")
-
--- trouble
-vim.keymap.set("n", "<leader>tt", "<CMD>:TroubleToggle<CR>")
-
--- testing
-vim.keymap.set("n", "<leader>tn", "<CMD>:TestNearest<CR>")
-vim.keymap.set("n", "<leader>tf", "<CMD>:TestFile<CR>")
-vim.keymap.set("n", "<leader>tl", "<CMD>:TestLast<CR>")
-vim.keymap.set("n", "<leader>tc", "<CMD>:TestClass<CR>")
-vim.keymap.set("n", "<leader>tv", "<CMD>:TestVisit<CR>")
-
--- debugger
-vim.keymap.set("n", "<leader>x", function()
-  require("dap").continue()
-end)
-
-vim.keymap.set("n", "<leader>db", function()
-  require("dapui").toggle({})
-end)
-
-vim.keymap.set("n", "<leader>bp", function()
-  require("dap").toggle_breakpoint()
-end)
 
 --git
 vim.keymap.set("n", "<leader>td", "<CMD>Gitsigns toggle_deleted<CR>")
