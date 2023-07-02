@@ -31,6 +31,8 @@ vim.keymap.set("n", "<leader>tt", function()
   }))
 end)
 
+vim.keymap.set("n", "<leader>t", "<CMD>lua vim.diagnostic.open_float(0, {scope='line'})<CR>")
+
 vim.keymap.set("n", "<leader>faf", function()
   telescope.find_files({
     no_ignore = true,
