@@ -26,7 +26,7 @@ vim.keymap.set("n", "<leader>tt", function()
     initial_mode = "normal",
     layout_config = {
       width = 0.9,
-      height= 0.3,
+      height = 0.3,
     },
   }))
 end)
@@ -39,6 +39,10 @@ vim.keymap.set("n", "<leader>faf", function()
     hidden = true,
   })
 end)
+
+vim.keymap.set("n", "<leader>s", function()
+  return ":%s/"
+end, { expr = true })
 
 vim.keymap.set("n", "<leader>faw", function()
   telescope.live_grep({
@@ -65,13 +69,7 @@ vim.keymap.set("n", "<leader>fW", function()
     initial_mode = "normal",
   })
 end)
-
 vim.keymap.set("n", "<leader>fw", "<CMD>Telescope live_grep<CR>")
-vim.keymap.set("n", "<leader>fc", "<CMD>Telescope commands<CR>")
-vim.keymap.set("n", "<leader>fb", "<CMD>Telescope buffers<CR>")
-
--- buffer
-vim.keymap.set("n", "<S-Tab>", "<CMD>:BufferPrevious<CR>")
 
 -- sidebar
 vim.keymap.set("n", "<leader>e", "<CMD>:NvimTreeToggle<CR>")

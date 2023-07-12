@@ -159,17 +159,5 @@ require("lazy").setup({
       require("plugins.lsp_signature")
     end,
   },
-  {
-    "jackMort/ChatGPT.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("plugins.chatgpt")
-    end,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-  },
-  "sindrets/diffview.nvim",
+  { "akinsho/git-conflict.nvim", version = "*", config = true },
 })

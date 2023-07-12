@@ -11,6 +11,9 @@ require("nvim-tree").setup({
     enable = true,
     auto_open = false,
   },
+  trash = {
+    cmd = "rm -r",
+  },
   git = {
     enable = true,
     ignore = false,
@@ -29,7 +32,7 @@ require("nvim-tree").setup({
         file = false,
         folder = false,
         git = false,
-        modified = false
+        modified = false,
       },
     },
   },
