@@ -44,6 +44,10 @@ vim.keymap.set("n", "<leader>s", function()
   return ":%s/"
 end, { expr = true })
 
+vim.keymap.set("v", "<leader>s", function()
+  return ":'<,'>s/"
+end, { expr = true })
+
 vim.keymap.set("n", "<leader>faw", function()
   telescope.live_grep({
     no_ignore = true,
