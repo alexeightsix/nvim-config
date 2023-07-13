@@ -45,7 +45,7 @@ vim.keymap.set("n", "<leader>s", function()
 end, { expr = true })
 
 vim.keymap.set("v", "<leader>s", function()
-  return ":'<,'>s/"
+  return ":s/"
 end, { expr = true })
 
 vim.keymap.set("n", "<leader>faw", function()
