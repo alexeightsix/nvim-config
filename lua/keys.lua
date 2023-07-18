@@ -1,12 +1,26 @@
 local telescope = require("telescope.builtin")
 local lsp = require("lsp-zero")
 
+vim.keymap.set("n", "gd", "<Nop>")
+
 lsp.on_attach(function()
+  vim.keymap.set("n", "gd", function()
+    telescope.lsp_definitions({
+      initial_mode = "normal",
+    })
+  end)
+
   vim.keymap.set("n", "<leader>ds", "<CMD>Telescope lsp_document_symbols<CR>")
-  vim.keymap.set("n", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>")
   vim.keymap.set("n", "<leader>fd", "<CMD>LspZeroFormat<CR>")
+
   vim.keymap.set("n", "<leader>ca", function()
     vim.lsp.buf.code_action()
+  end)
+
+  vim.keymap.set("n", "gd", function()
+    telescope.lsp_definitions({
+      initial_mode = "normal",
+    })
   end)
 end)
 
@@ -32,6 +46,7 @@ vim.keymap.set("n", "<leader>tt", function()
 end)
 
 vim.keymap.set("n", "<leader>t", "<CMD>lua vim.diagnostic.open_float(0, {scope='line'})<CR>")
+vim.keymap.set("n", "<S-Tab>", "<CMD>:cn<CR>")
 
 vim.keymap.set("n", "<leader>faf", function()
   telescope.find_files({
@@ -92,3 +107,7 @@ vim.keymap.set("n", "<leader>nc", "<CMD>:edit $MYVIMRC<CR><CMD>:e $MYVIMRC<CR>")
 vim.api.nvim_set_keymap("i", "<C-A-Up>", "<Plug>(copilot-next)", { noremap = false, silent = true })
 vim.api.nvim_set_keymap("i", "<C-A-Down>", "<Plug>(copilot-previous)", { noremap = false, silent = true })
 vim.api.nvim_set_keymap("i", "<C-A-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+
+vim.keymap.set("n", "<M-l>", function()
+  print("hello world")
+end)
