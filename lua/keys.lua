@@ -1,17 +1,18 @@
 local telescope = require("telescope.builtin")
-local lsp = require("lsp-zero")
-
-vim.keymap.set("n", "gd", "<Nop>")
-
-lsp.on_attach(function()
+-- local lsp = require("lsp-zero")
+--
+--
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function()
   vim.keymap.set("n", "gd", function()
     telescope.lsp_definitions({
       initial_mode = "normal",
     })
   end)
 
-  vim.keymap.set("n", "<leader>ds", "<CMD>Telescope lsp_document_symbols<CR>")
-  vim.keymap.set("n", "<leader>fd", "<CMD>LspZeroFormat<CR>")
+  vim.keymap.set("n", "<leader>fd", function()
+    vim.lsp.buf.format({async = false, timeout_ms = 10000})
+  end)
 
   vim.keymap.set("n", "<leader>ca", function()
     vim.lsp.buf.code_action()
@@ -22,7 +23,10 @@ lsp.on_attach(function()
       initial_mode = "normal",
     })
   end)
-end)
+  end
+})
+
+vim.keymap.set("n", "gd", "<Nop>")
 
 vim.keymap.set("n", "<leader>ff", function()
   vim.fn.system("git rev-parse --is-inside-work-tree")
