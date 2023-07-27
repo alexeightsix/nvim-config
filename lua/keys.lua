@@ -1,28 +1,24 @@
 local telescope = require("telescope.builtin")
--- local lsp = require("lsp-zero")
---
---
+
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function()
-  vim.keymap.set("n", "gd", function()
-    telescope.lsp_definitions({
-      initial_mode = "normal",
-    })
-  end)
+    vim.keymap.set('n', '<S-k>', function()
+      vim.lsp.buf.hover()
+    end)
 
-  vim.keymap.set("n", "<leader>fd", function()
-    vim.lsp.buf.format({async = false, timeout_ms = 10000})
-  end)
+    vim.keymap.set("n", "<leader>fd", function()
+      vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
+    end)
 
-  vim.keymap.set("n", "<leader>ca", function()
-    vim.lsp.buf.code_action()
-  end)
+    vim.keymap.set("n", "<leader>ca", function()
+      vim.lsp.buf.code_action()
+    end)
 
-  vim.keymap.set("n", "gd", function()
-    telescope.lsp_definitions({
-      initial_mode = "normal",
-    })
-  end)
+    vim.keymap.set("n", "gd", function()
+      telescope.lsp_definitions({
+        initial_mode = "normal",
+      })
+    end)
   end
 })
 
@@ -40,13 +36,9 @@ vim.keymap.set("n", "<leader>ff", function()
 end)
 
 vim.keymap.set("n", "<leader>tt", function()
-  telescope.diagnostics(require("telescope.themes").get_dropdown({
+  telescope.diagnostics({
     initial_mode = "normal",
-    layout_config = {
-      width = 0.9,
-      height = 0.3,
-    },
-  }))
+  })
 end)
 
 vim.keymap.set("n", "<leader>t", "<CMD>lua vim.diagnostic.open_float(0, {scope='line'})<CR>")
@@ -92,6 +84,7 @@ vim.keymap.set("n", "<leader>fW", function()
     initial_mode = "normal",
   })
 end)
+
 vim.keymap.set("n", "<leader>fw", "<CMD>Telescope live_grep<CR>")
 
 -- sidebar
@@ -111,7 +104,3 @@ vim.keymap.set("n", "<leader>nc", "<CMD>:edit $MYVIMRC<CR><CMD>:e $MYVIMRC<CR>")
 vim.api.nvim_set_keymap("i", "<C-A-Up>", "<Plug>(copilot-next)", { noremap = false, silent = true })
 vim.api.nvim_set_keymap("i", "<C-A-Down>", "<Plug>(copilot-previous)", { noremap = false, silent = true })
 vim.api.nvim_set_keymap("i", "<C-A-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
-
-vim.keymap.set("n", "<M-l>", function()
-  print("hello world")
-end)

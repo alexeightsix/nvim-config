@@ -2,6 +2,10 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+if vim.loader and vim.fn.has "nvim-0.9.1" == 1 then
+  vim.loader.enable()
+end
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
@@ -15,18 +19,10 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 
+
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  {
-    priority = 4000,
-    "lewis6991/impatient.nvim",
-    config = function()
-       require("impatient")
-    end,
-    lazy = false,
-  },
-  "nvim-tree/nvim-web-devicons",
   {
     priority = 5000,
     "Mofiqul/dracula.nvim",
@@ -86,15 +82,19 @@ require("lazy").setup({
       require("plugins.illuminate")
     end,
   },
-   {
+  {
     'neovim/nvim-lspconfig',
     dependencies = {
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      {
+        'j-hui/fidget.nvim',
+        tag = 'legacy',
+        opts = {}
+      },
       'folke/neodev.nvim',
     },
-  },  
+  },
   {
     'hrsh7th/nvim-cmp',
     dependencies = {
@@ -127,12 +127,12 @@ require("lazy").setup({
       require("plugins.colorizer")
     end,
   },
+  "ray-x/lsp_signature.nvim",
   {
-    "ray-x/lsp_signature.nvim",
-    config = function()
-      require("plugins.lsp_signature")
-    end,
+    "akinsho/git-conflict.nvim",
+    version = "*",
+    config = true
   },
-  { "akinsho/git-conflict.nvim",     version = "*", config = true },
-  { "christoomey/vim-tmux-navigator" },
+  "christoomey/vim-tmux-navigator",
+  "stefandtw/quickfix-reflector.vim"
 })
