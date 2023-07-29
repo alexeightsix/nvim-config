@@ -56,7 +56,10 @@ require("lazy").setup({
       "nvim-tree/nvim-web-devicons",
     },
   },
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate"
+  },
   "mbbill/undotree",
   {
     "lewis6991/gitsigns.nvim",
@@ -82,6 +85,7 @@ require("lazy").setup({
       require("plugins.illuminate")
     end,
   },
+  "jose-elias-alvarez/null-ls.nvim",
   {
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -101,7 +105,6 @@ require("lazy").setup({
       'hrsh7th/cmp-nvim-lsp',
     },
   },
-  { "farmergreg/vim-lastplace" },
   {
     "rmagatti/auto-session",
     config = function()
@@ -134,5 +137,11 @@ require("lazy").setup({
     config = true
   },
   "christoomey/vim-tmux-navigator",
-  "stefandtw/quickfix-reflector.vim"
+  "stefandtw/quickfix-reflector.vim",
+  {
+    "L3MON4D3/LuaSnip",
+    version = "2.*",
+    build = "make install_jsregexp"
+  },
+  "ThePrimeagen/harpoon",
 })

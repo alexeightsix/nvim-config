@@ -52,17 +52,12 @@ mason_lspconfig.setup_handlers {
     }
   end
 }
-
 local cmp = require 'cmp'
 
 cmp.setup {
   snippet = {
-    -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      -- vim.fn["vsnip#anonymous"](args.body)   -- For `vsnip` users.
-      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      require('luasnip').lsp_expand(args.body)
     end,
   },
 
@@ -84,11 +79,13 @@ cmp.setup {
   })
 }
 
+
+
+
 -- require("lsp_signature").setup({
 --   floating_window = false,
 -- })
 
--- vim.diagnostic.config({ virtual_text = true })
 
 -- local null_ls = require("null-ls")
 --
@@ -104,9 +101,6 @@ cmp.setup {
 --
 
 
---
--- local lspkind = require("lspkind")
--- lsp.preset("recommended")
 --
 -- -- lsp.ensure_installed({
 -- --   "bashls",
@@ -162,3 +156,15 @@ cmp.setup {
 --   },
 -- })
 --
+
+vim.diagnostic.config({
+  virtual_text = true
+})
+
+local null_ls = require("null-ls")
+null_ls.setup({
+  sources = {
+    null_ls.builtins.formatting.prettier.with {
+      filetypes = { 'css', 'scss' },
+    }, }
+})
