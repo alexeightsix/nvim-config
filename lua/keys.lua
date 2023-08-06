@@ -104,20 +104,3 @@ vim.keymap.set("n", "<leader>nc", "<CMD>:edit $MYVIMRC<CR><CMD>:e $MYVIMRC<CR>")
 vim.api.nvim_set_keymap("i", "<C-A-Up>", "<Plug>(copilot-next)", { noremap = false, silent = true })
 vim.api.nvim_set_keymap("i", "<C-A-Down>", "<Plug>(copilot-previous)", { noremap = false, silent = true })
 vim.api.nvim_set_keymap("i", "<C-A-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
-
--- harpoon
-for i = 5, 1, -1
-do
-  vim.keymap.set("n", "<A-" .. i .. ">", function()
-    require("harpoon.ui").nav_file(i) -- navigates to file 3  end)
-  end)
-end
-
-vim.keymap.set("n", "<leader>h", function()
-  require("harpoon.ui").toggle_quick_menu()
-end)
-
-vim.keymap.set("n", "<A-" .. 9 .. ">", function()
-  require("harpoon.mark").add_file()
-  local current_file = vim.fn.expand("%:p")
-end)
