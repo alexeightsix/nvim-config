@@ -134,7 +134,10 @@ require("lazy").setup({
   {
     "akinsho/git-conflict.nvim",
     version = "*",
-    config = true
+    config = true,
+    require = function()
+      require("plugins.conflict")
+    end,
   },
   "christoomey/vim-tmux-navigator",
   "stefandtw/quickfix-reflector.vim",

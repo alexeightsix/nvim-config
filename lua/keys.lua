@@ -41,7 +41,7 @@ vim.keymap.set("n", "<leader>tt", function()
   })
 end)
 
-vim.keymap.set("n", "<leader>r", function()
+vim.keymap.set("n", "<leader>rg", function()
   telescope.registers({
     initial_mode = "normal",
   })
