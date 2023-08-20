@@ -1,4 +1,3 @@
--- leader
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -18,7 +17,6 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
-
 
 vim.opt.rtp:prepend(lazypath)
 
@@ -58,8 +56,12 @@ require("lazy").setup({
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate"
+    build = ":TSUpdate",
+    config = function()
+      require("plugins.treesitter")
+    end,
   },
+  "virchau13/tree-sitter-astro",
   "mbbill/undotree",
   {
     "lewis6991/gitsigns.nvim",
@@ -145,5 +147,5 @@ require("lazy").setup({
     "L3MON4D3/LuaSnip",
     version = "2.*",
     build = "make install_jsregexp"
-  }
+  },
 })

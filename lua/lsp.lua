@@ -52,6 +52,7 @@ mason_lspconfig.setup_handlers {
     }
   end
 }
+
 local cmp = require 'cmp'
 
 cmp.setup {
@@ -84,15 +85,16 @@ vim.diagnostic.config({
 })
 
 local null_ls = require("null-ls")
+
 null_ls.setup({
   sources = {
     null_ls.builtins.formatting.prettier.with {
-      filetypes = { 'css', 'scss' },
+      filetypes = { 'css', 'scss', 'astro'},
     }, }
 })
 
 require "lsp_signature".setup({
-  bind = true,   -- This is mandatory, otherwise border config won't get registered.
+  bind = true, -- This is mandatory, otherwise border config won't get registered.
   handler_opts = {
     border = "rounded"
   }

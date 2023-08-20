@@ -35,18 +35,9 @@ vim.api.nvim_create_autocmd("VimEnter", {
   pattern = "*",
   nested = true,
   callback = function()
-    -- hack to set the cwd
-    -- require("nvim-tree.actions.tree.toggle").fn()
-    -- require("nvim-tree.actions.tree.toggle").fn()
-
+    vim.cmd([[SessionRestore]])
     -- open telescope files if we are in a directory
     local a = vim.fn.expand("%")
-
-    -- execute :SessionRestore 
-
-      vim.cmd([[SessionRestore]])
-
-
 
     if is_dir(a) or a == "." then
       require("telescope.builtin").oldfiles({

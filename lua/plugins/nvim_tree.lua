@@ -29,10 +29,10 @@ require("nvim-tree").setup({
     group_empty = true,
     icons = {
       show = {
-        file = false,
-        folder = false,
-        git = false,
-        modified = false,
+        file = true,
+        folder = true,
+        git = true,
+        modified = true,
       },
     },
   },
