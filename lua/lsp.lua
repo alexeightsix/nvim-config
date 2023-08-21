@@ -55,13 +55,18 @@ mason_lspconfig.setup_handlers {
 
 local cmp = require 'cmp'
 
+local luasnip = require 'luasnip'
+
+require('luasnip.loaders.from_vscode').lazy_load()
+
+luasnip.config.setup {}
+
 cmp.setup {
   snippet = {
     expand = function(args)
       require('luasnip').lsp_expand(args.body)
     end,
   },
-
   window = {
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
@@ -73,11 +78,11 @@ cmp.setup {
     ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
   }),
-  sources = cmp.config.sources({
+  sources = {
     { name = 'nvim_lsp' },
-  }, {
+    { name = 'luasnip' },
     { name = 'buffer' },
-  })
+  }
 }
 
 vim.diagnostic.config({
@@ -89,7 +94,7 @@ local null_ls = require("null-ls")
 null_ls.setup({
   sources = {
     null_ls.builtins.formatting.prettier.with {
-      filetypes = { 'css', 'scss', 'astro'},
+      filetypes = { 'css', 'scss', 'astro' },
     }, }
 })
 

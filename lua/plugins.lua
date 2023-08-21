@@ -105,6 +105,8 @@ require("lazy").setup({
     'hrsh7th/nvim-cmp',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
     },
   },
   {
@@ -143,6 +145,7 @@ require("lazy").setup({
   },
   "christoomey/vim-tmux-navigator",
   "stefandtw/quickfix-reflector.vim",
+  "tpope/vim-fugitive",
   {
     "L3MON4D3/LuaSnip",
     version = "2.*",

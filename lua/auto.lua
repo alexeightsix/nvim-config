@@ -17,7 +17,6 @@ local function exists(file)
   local ok, err, code = os.rename(file, file)
   if not ok then
     if code == 13 then
-      -- Permission denied, but it exists
       return true
     end
   end
@@ -35,7 +34,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
   pattern = "*",
   nested = true,
   callback = function()
-    vim.cmd([[SessionRestore]])
     -- open telescope files if we are in a directory
     local a = vim.fn.expand("%")
 
