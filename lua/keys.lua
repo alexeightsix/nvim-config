@@ -103,10 +103,9 @@ vim.keymap.set("n", "<leader>bl", "<CMD>Gitsigns blame_line<CR>")
 -- undotree
 vim.keymap.set("n", "<leader>ut", "<CMD>:UndotreeToggle<CR>")
 
--- open neovim config
-vim.keymap.set("n", "<leader>nc", "<CMD>:edit $MYVIMRC<CR><CMD>:e $MYVIMRC<CR>")
+vim.keymap.set("n","<leader>nc", function()
+  vim.cmd("cd ~/.config/nvim")
+  vim.cmd("e init.lua")
+end)
 
--- copilot
-vim.api.nvim_set_keymap("i", "<C-A-Up>", "<Plug>(copilot-next)", { noremap = false, silent = true })
-vim.api.nvim_set_keymap("i", "<C-A-Down>", "<Plug>(copilot-previous)", { noremap = false, silent = true })
 vim.api.nvim_set_keymap("i", "<C-A-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })

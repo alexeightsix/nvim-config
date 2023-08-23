@@ -111,12 +111,6 @@ require("lazy").setup({
     },
   },
   {
-    "rmagatti/auto-session",
-    config = function()
-      require("plugins.auto-session")
-    end,
-  },
-  {
     "yamatsum/nvim-cursorline",
     config = function()
       require("nvim-cursorline")
