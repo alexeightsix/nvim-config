@@ -94,12 +94,13 @@ require("lazy").setup({
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
       {
-        'j-hui/fidget.nvim',
-        tag = 'legacy',
-        opts = {}
-      },
-      'folke/neodev.nvim',
-    },
+        "j-hui/fidget.nvim",
+        tag = "legacy",
+        event = "LspAttach",
+        opts = {
+          -- options
+        },
+      } },
   },
   {
     'hrsh7th/nvim-cmp',
@@ -116,7 +117,6 @@ require("lazy").setup({
       require("nvim-cursorline")
     end,
   },
-  "editorconfig/editorconfig-vim",
   {
     "github/copilot.vim",
     config = function()
