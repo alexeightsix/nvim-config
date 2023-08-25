@@ -13,20 +13,6 @@ autocmd("TextYankPost", {
   end,
 })
 
-local function exists(file)
-  local ok, err, code = os.rename(file, file)
-  if not ok then
-    if code == 13 then
-      return true
-    end
-  end
-  return ok, err
-end
-
-local function is_dir(path)
-  return exists(path .. "/")
-end
-
 local group_id = vim.api.nvim_create_augroup("nvim_start", { clear = true })
 
 vim.api.nvim_create_autocmd("VimEnter", {
@@ -34,10 +20,9 @@ vim.api.nvim_create_autocmd("VimEnter", {
   pattern = "*",
   nested = true,
   callback = function()
-    -- open telescope files if we are in a directory
     local a = vim.fn.expand("%")
 
-    if is_dir(a) or a == "." then
+    if require('plenary').path:new(a):exists() or a == "." then
       require("telescope.builtin").oldfiles({
         only_cwd = true,
         initial_mode = "normal",

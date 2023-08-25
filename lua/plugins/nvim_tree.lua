@@ -1,11 +1,8 @@
--- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
--- OR setup with some options
 require("nvim-tree").setup({
   hijack_directories = {
     enable = true,
@@ -15,7 +12,7 @@ require("nvim-tree").setup({
     cmd = "rm -r",
   },
   git = {
-    enable = true,
+    enable = false,
     ignore = false,
     timeout = 500,
   },
