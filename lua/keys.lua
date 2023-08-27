@@ -103,9 +103,10 @@ vim.keymap.set("n", "<leader>bl", "<CMD>Gitsigns blame_line<CR>")
 -- undotree
 vim.keymap.set("n", "<leader>ut", "<CMD>:UndotreeToggle<CR>")
 
-vim.keymap.set("n","<leader>nc", function()
+vim.keymap.set("n", "<leader>nc", function()
   vim.cmd("cd ~/.config/nvim")
   vim.cmd("e init.lua")
 end)
 
 vim.api.nvim_set_keymap("i", "<C-A-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })

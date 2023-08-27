@@ -1,22 +1,18 @@
-local augroup = vim.api.nvim_create_augroup
-local autocmd = vim.api.nvim_create_autocmd
-local yank_group = augroup("HighlightYank", {})
+local function augroup(name)
+  return vim.api.nvim_create_augroup("augroup_" .. name, { clear = true })
+end
 
-autocmd("TextYankPost", {
-  group = yank_group,
-  pattern = "*",
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = augroup("highlight_yank"),
   callback = function()
     vim.highlight.on_yank({
-      higroup = "IncSearch",
-      timeout = 100,
+      timeout = 100
     })
   end,
 })
 
-local group_id = vim.api.nvim_create_augroup("nvim_start", { clear = true })
-
 vim.api.nvim_create_autocmd("VimEnter", {
-  group = group_id,
+  group = augroup("nvim_start"),
   pattern = "*",
   nested = true,
   callback = function()
