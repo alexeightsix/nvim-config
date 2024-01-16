@@ -26,3 +26,23 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  group = augroup("log"),
+  nested = true,
+  callback = function()
+    local dictionary = {
+      ["lua"] = "print(x)",
+      ["php"] = "var_dump(x);",
+      ["js"] = "console.log(x);",
+    }
+    local q = dictionary[vim.bo.filetype]
+
+    if (q ~= nil) then
+      local _, _, o = string.find(q, "(.*)[x]")
+      local _, _, c = string.find(q, "[x](.*)")
+      local key = vim.api.nvim_replace_termcodes("yiWo" .. o .. "<ESC>pi" .. c .. "\n<ESC>", true, true, true)
+      vim.fn.setreg("l", key)
+    end
+  end,
+})

@@ -41,7 +41,7 @@ vim.keymap.set("n", "<leader>tt", function()
   })
 end)
 
-vim.keymap.set("n", "<leader>rg", function()
+vim.keymap.set("n", "<leader>r", function()
   telescope.registers({
     initial_mode = "normal",
   })
@@ -107,6 +107,11 @@ vim.keymap.set("n", "<leader>nc", function()
   vim.cmd("cd ~/.config/nvim")
   vim.cmd("e init.lua")
 end)
+
+--map :W to :w
+vim.cmd[[ 
+  command! W write
+]]
 
 vim.api.nvim_set_keymap("i", "<C-A-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })

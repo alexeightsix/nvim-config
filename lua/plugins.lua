@@ -69,12 +69,7 @@ require("lazy").setup({
       require("plugins.gitsigns")
     end,
   },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    config = function()
-      require("plugins.blanklines")
-    end,
-  },
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   {
     "numToStr/Comment.nvim",
     config = function()
@@ -87,17 +82,12 @@ require("lazy").setup({
       require("plugins.illuminate")
     end,
   },
-  "jose-elias-alvarez/null-ls.nvim",
+  "nvimtools/none-ls.nvim",
   {
     'neovim/nvim-lspconfig',
     dependencies = {
       { 'williamboman/mason.nvim', config = true },
-      'williamboman/mason-lspconfig.nvim',
-      {
-        "j-hui/fidget.nvim",
-        tag = "legacy",
-        event = "LspAttach",
-      }
+      'williamboman/mason-lspconfig.nvim'
     }
   },
   {
