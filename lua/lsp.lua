@@ -8,8 +8,12 @@ local servers = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
+      diagnostics = {
+        globals = { 'vim' },
+      },
     },
   },
+
 }
 
 local border = {
@@ -80,7 +84,7 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    { name = "friendly-snippets"},
+    { name = "friendly-snippets" },
     { name = 'path' },
     { name = 'buffer' }
   }
@@ -105,4 +109,3 @@ require "lsp_signature".setup({
     border = "rounded"
   }
 })
-

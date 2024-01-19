@@ -136,3 +136,9 @@ require("lazy").setup({
   },
   "rafamadriz/friendly-snippets"
 })
+
+require("plugins.log").setup({
+  ["php"] = "var_dump(x);",
+  ["lua"] = "print(x)",
+  ["js tsx"] = "console.log(x);",
+})

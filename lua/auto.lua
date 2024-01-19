@@ -26,29 +26,3 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end
   end,
 })
-
-vim.api.nvim_create_autocmd("VimEnter", {
-  group = augroup("log"),
-  nested = true,
-  callback = function()
-    local dictionary = {
-      ["lua"] = "print(x)",
-      ["php"] = "var_dump(x);",
-      ["js"] = "console.log(x);",
-    }
-    local ft = vim.bo.filetype
-    local q = dictionary[ft]
-
-    if (q ~= nil) then
-      local _, _, o = string.find(q, "(.*)[x]")
-      local _, _, c = string.find(q, "[x](.*)")
-      local key = vim.api.nvim_replace_termcodes("yiWo" .. o .. "<ESC>pi" .. c .. "\n<ESC>", true, true, true)
-
-      vim.fn.setreg("l", key)
-
-      if (ft == "php") then
-        vim.fn.setreg("t", vim.api.nvim_replace_termcodes("ieval(\\Psy\\sh());\n<ESC>", true, true, true))
-      end
-    end
-  end,
-})
