@@ -115,3 +115,4 @@ vim.cmd[[
 
 vim.api.nvim_set_keymap("i", "<C-A-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+vim.fn.setreg("t", vim.api.nvim_replace_termcodes("ieval(\\Psy\\sh());\n<ESC>", true, true, true))

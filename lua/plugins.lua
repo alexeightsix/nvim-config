@@ -26,6 +26,7 @@ require("lazy").setup({
     "Mofiqul/dracula.nvim",
     config = function()
       vim.cmd([[colorscheme dracula]])
+      vim.cmd [[hi! Normal ctermbg=none ctermfg=none guifg=none guibg=none]]
     end,
     lazy = false,
   },
@@ -36,8 +37,11 @@ require("lazy").setup({
       require("plugins.lualine")
     end,
   },
-  { 
-    'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
+  {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build =
+    'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+  },
   {
     "nvim-telescope/telescope.nvim",
     version = "0.1.x",
@@ -71,7 +75,7 @@ require("lazy").setup({
       require("plugins.gitsigns")
     end,
   },
-  { "lukas-reineke/indent-blankline.nvim",      main = "ibl",                                                                                                                          opts = {} },
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   {
     "numToStr/Comment.nvim",
     config = function()

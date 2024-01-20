@@ -41,7 +41,3 @@ vim.opt.undofile = true                    -- enable persistent undo
 vim.opt.updatetime = 300                   -- faster completion
 vim.opt.wrap = false                       -- display lines as one long line
 vim.opt.writebackup = false                -- if a file is being edited by another program (or was written to file while editing with another program) it is not allowed to be edited
-
-vim.cmd [[hi! Normal ctermbg=none ctermfg=none guifg=none guibg=none]]
-vim.fn.setreg("t", vim.api.nvim_replace_termcodes("ieval(\\Psy\\sh());\n<ESC>", true, true, true))
-
