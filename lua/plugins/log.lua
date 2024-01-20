@@ -1,9 +1,12 @@
 local M = {}
 
-M.dict = {
-  ["lua"] = "print(x)",
-  ["php"] = "var_dump(x);",
-  ["js tsx"] = "console.log(x);",
+M.defaults = {
+  register = "l",
+  mappings = {
+    ["php"] = "var_dump(x);",
+    ["lua"] = "print(x)",
+    ["js tsx"] = "console.log(x);",
+  }
 }
 
 M.escape = function(str)
@@ -36,18 +39,31 @@ M.merge = function(a, b)
   return a
 end
 
-M.setup = function(opts)
-  local dict = M.merge(M.dict, opts)
+M.set = function(reg, str)
+  vim.fn.setreg(reg, str)
+end
+
+M.clear = function(reg)
+  vim.fn.setreg(reg, "")
+end
+
+M.setup = function(params)
+  local opts = M.merge(M.defaults, params)
   vim.api.nvim_create_autocmd("BufEnter", {
+    group = vim.api.nvim_create_augroup("_log",
+      {
+        clear = true
+      }
+    ),
     pattern = "*",
     nested = true,
     callback = function()
-      vim.fn.setreg("l", "")
-      local q = M.get(dict, vim.bo.filetype)
-      if (q ~= nil) then
-        local _start, _end = M.parse(q)
+      M.clear(opts.register)
+      local query = M.get(opts.mappings, vim.bo.filetype)
+      if (query ~= nil) then
+        local _start, _end = M.parse(query)
         local key = M.escape("yiWo" .. _start .. "<ESC>pa" .. _end .. "<CR><ESC>")
-        vim.fn.setreg("l", key)
+        M.set(opts.register, key)
       end
     end
   })

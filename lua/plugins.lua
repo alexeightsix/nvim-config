@@ -106,12 +106,6 @@ require("lazy").setup({
     },
   },
   {
-    "yamatsum/nvim-cursorline",
-    config = function()
-      require("nvim-cursorline")
-    end,
-  },
-  {
     "github/copilot.vim",
     config = function()
       require("plugins.copilot")
