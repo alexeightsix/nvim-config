@@ -1,9 +1,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-if vim.loader and vim.fn.has "nvim-0.9.1" == 1 then
-  vim.loader.enable()
-end
+vim.loader.enable()
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
@@ -126,9 +124,8 @@ require("lazy").setup({
       require("plugins.conflict")
     end,
   },
+  "j-hui/fidget.nvim",
   "christoomey/vim-tmux-navigator",
-  "stefandtw/quickfix-reflector.vim",
-  "tpope/vim-fugitive",
   {
     "L3MON4D3/LuaSnip",
     version = "2.*",
@@ -138,7 +135,7 @@ require("lazy").setup({
 })
 
 require("plugins.log").setup({
-  ["php"] = "var_dump(x);",
+  ["php"] = "print_r(x);",
   ["lua"] = "print(x)",
   ["js tsx"] = "console.log(x);",
 })

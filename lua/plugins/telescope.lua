@@ -8,6 +8,14 @@ require("telescope").setup({
     }
   },
   defaults = {
+    file_ignore_patterns = {
+      "node_modules/.*",
+      "yarn.lock",
+      "package-lock.json",
+      "lazy-lock.json",
+      "*.sql",
+      ".git/.*",
+    },
     preview = {
       mime_hook = function(filepath, bufnr, opts)
         local is_image = function(filepath)
