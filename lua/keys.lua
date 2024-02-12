@@ -7,7 +7,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end)
 
     vim.keymap.set("n", "<leader>fd", function()
-      vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
+      vim.lsp.buf.format(
+        {
+          async = false,
+          timeout_ms = 10000,
+        })
     end)
 
     vim.keymap.set("n", "<leader>ca", function()
@@ -109,7 +113,7 @@ vim.keymap.set("n", "<leader>nc", function()
 end)
 
 --map :W to :w
-vim.cmd[[ 
+vim.cmd [[
   command! W write
 ]]
 

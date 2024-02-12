@@ -1,21 +1,3 @@
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
-local mason_lspconfig = require 'mason-lspconfig'
-
-local servers = {
-  lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-      diagnostics = {
-        globals = { 'vim' },
-      },
-    },
-  },
-
-}
-
 local border = {
   { "🭽", "FloatBorder" },
   { "▔", "FloatBorder" },
@@ -28,6 +10,7 @@ local border = {
 }
 
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+
 function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
   opts = opts or {}
   opts.border = border
@@ -36,10 +19,28 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
   return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+local mason_lspconfig = require 'mason-lspconfig'
+
+
 local handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
   ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
 }
+local servers = {
+  lua_ls = {
+    Lua = {
+      workspace = { checkThirdParty = false },
+      telemetry = { enable = false },
+      diagnostics = {
+        globals = { 'vim' },
+      }
+    },
+  },
+}
+
 
 mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
@@ -122,14 +123,6 @@ vim.diagnostic.config({
   virtual_text = true
 })
 
-local null_ls = require("null-ls")
-
-null_ls.setup({
-  sources = {
-    null_ls.builtins.formatting.prettier.with {
-      filetypes = { 'css', 'scss', 'astro' },
-    }, }
-})
 
 require "lsp_signature".setup({
   bind = true, -- This is mandatory, otherwise border config won't get registered.
@@ -137,3 +130,35 @@ require "lsp_signature".setup({
     border = "rounded"
   }
 })
+
+local null_ls = require("null-ls")
+
+local null_ls_sources = {}
+
+table.insert(null_ls_sources, null_ls.builtins.formatting.prettier.with {
+  filetypes = { 'css', 'scss', 'astro' },
+})
+
+require('lspconfig').intelephense.setup({
+  on_init = function(client)
+    local res = vim.fn.filereadable(client.config.root_dir .. '/vendor/bin/pint')
+
+    if res == 1 then
+      client.server_capabilities.documentFormattingProvider = false
+      local pint = null_ls.builtins.formatting.pint.with {
+        filetypes = { 'php' },
+      }
+      table.insert(null_ls_sources, pint)
+
+      null_ls.setup({
+        sources = null_ls_sources
+      })
+    end
+  end,
+})
+
+require('lspconfig').on_attach = function()
+  null_ls.setup({
+    sources = null_ls_sources
+  })
+end
