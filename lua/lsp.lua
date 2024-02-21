@@ -139,6 +139,10 @@ table.insert(null_ls_sources, null_ls.builtins.formatting.prettier.with {
   filetypes = { 'css', 'scss', 'astro' },
 })
 
+table.insert(null_ls_sources, null_ls.builtins.formatting.blade_formatter)
+
+
+
 require('lspconfig').intelephense.setup({
   on_init = function(client)
     local res = vim.fn.filereadable(client.config.root_dir .. '/vendor/bin/pint')
@@ -162,3 +166,11 @@ require('lspconfig').on_attach = function()
     sources = null_ls_sources
   })
 end
+
+require 'lspconfig'.terraformls.setup {}
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = { "*.tf", "*.tfvars" },
+  callback = function()
+    vim.lsp.buf.format()
+  end,
+})
