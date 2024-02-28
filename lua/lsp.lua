@@ -24,11 +24,11 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local mason_lspconfig = require 'mason-lspconfig'
 
-
 local handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
   ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
 }
+
 local servers = {
   lua_ls = {
     Lua = {
@@ -41,9 +41,25 @@ local servers = {
   },
 }
 
-
 mason_lspconfig.setup {
-  ensure_installed = vim.tbl_keys(servers),
+  ensure_installed = {
+    "bashls",
+    -- "blade_formatter",
+    "docker_compose_language_service",
+    "dockerls",
+    "eslint",
+    "gopls",
+    "html",
+    "intelephense",
+    "lua_ls",
+    -- "nginx-language-server",
+    "pyright",
+    "tailwindcss",
+    "theme_check",
+    "tsserver",
+    "vimls",
+    "yamlls",
+  },
 }
 
 mason_lspconfig.setup_handlers {
@@ -123,7 +139,6 @@ vim.diagnostic.config({
   virtual_text = true
 })
 
-
 require "lsp_signature".setup({
   bind = true, -- This is mandatory, otherwise border config won't get registered.
   handler_opts = {
@@ -140,8 +155,6 @@ table.insert(null_ls_sources, null_ls.builtins.formatting.prettier.with {
 })
 
 table.insert(null_ls_sources, null_ls.builtins.formatting.blade_formatter)
-
-
 
 require('lspconfig').intelephense.setup({
   on_init = function(client)
@@ -167,7 +180,6 @@ require('lspconfig').on_attach = function()
   })
 end
 
-require 'lspconfig'.terraformls.setup {}
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*.tf", "*.tfvars" },
   callback = function()
