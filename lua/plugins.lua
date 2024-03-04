@@ -42,8 +42,10 @@ require("lazy").setup({
   {
     "nvim-telescope/telescope.nvim",
     version = "0.1.x",
-    dependencies = { { "nvim-lua/plenary.nvim" } },
-    lazy = false,
+    dependencies = {
+      { "nvim-lua/plenary.nvim" }
+    },
+    lazy = true,
     config = function()
       require("plugins.telescope")
     end,
@@ -99,7 +101,8 @@ require("lazy").setup({
       'hrsh7th/cmp-nvim-lsp',
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
-      'hrsh7th/cmp-path'
+      'hrsh7th/cmp-path',
+      'rafamadriz/friendly-snippets'
     },
   },
   {
@@ -123,14 +126,25 @@ require("lazy").setup({
       require("plugins.conflict")
     end,
   },
-  "j-hui/fidget.nvim",
   "christoomey/vim-tmux-navigator",
   {
     "L3MON4D3/LuaSnip",
     version = "2.*",
     build = "make install_jsregexp"
   },
-  "rafamadriz/friendly-snippets"
+  {
+    "sontungexpt/url-open",
+    branch = "mini",
+    event = "VeryLazy",
+    cmd = "URLOpenUnderCursor",
+    config = function()
+      local status_ok, url_open = pcall(require, "url-open")
+      if not status_ok then
+        return
+      end
+      require('plugins.url');
+    end,
+  },
 })
 
 require("plugins.log").setup({

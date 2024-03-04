@@ -104,6 +104,9 @@ vim.keymap.set("n", "<leader>e", "<CMD>:NvimTreeToggle<CR>")
 vim.keymap.set("n", "<leader>td", "<CMD>Gitsigns toggle_deleted<CR>")
 vim.keymap.set("n", "<leader>bl", "<CMD>Gitsigns blame_line<CR>")
 
+-- url
+vim.keymap.set("n", "gx", "<CMD>URLOpenUnderCursor<CR>");
+
 -- undotree
 vim.keymap.set("n", "<leader>ut", "<CMD>:UndotreeToggle<CR>")
 
@@ -119,4 +122,4 @@ vim.cmd [[
 
 vim.api.nvim_set_keymap("i", "<C-A-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
-vim.fn.setreg("t", vim.api.nvim_replace_termcodes("ieval(\\Psy\\sh());\n<ESC>", true, true, true))
+vim.fn.setreg("t", vim.api.nvim_replace_termcodes("oeval(\\Psy\\sh());\n<ESC>", true, true, true))
