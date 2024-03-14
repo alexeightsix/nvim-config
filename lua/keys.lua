@@ -123,3 +123,22 @@ vim.cmd [[
 vim.api.nvim_set_keymap("i", "<C-A-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 vim.fn.setreg("t", vim.api.nvim_replace_termcodes("oeval(\\Psy\\sh());\n<ESC>", true, true, true))
+
+vim.keymap.set('n', '<leader>wt', function()
+  require("plugins.lwt").switch()
+end)
+
+vim.keymap.set('n', 'M', function()
+  local harpoon = require("harpoon")
+  harpoon.ui:toggle_quick_menu(harpoon:list())
+end)
+
+vim.keymap.set('n', 'm', function()
+  require("harpoon"):list():append()
+end)
+
+for i = 1, 4 do
+  vim.keymap.set('n', 'm' .. i, function()
+    require("harpoon"):list():select(i)
+  end)
+end

@@ -145,6 +145,20 @@ require("lazy").setup({
       require('plugins.url');
     end,
   },
+  -- {
+  --   "iamcco/markdown-preview.nvim",
+  --   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+  --   build = "cd app && npm install",
+  --   init = function()
+  --     vim.g.mkdp_filetypes = { "markdown" }
+  --   end,
+  --   ft = { "markdown" },
+  -- },
+  --
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+  }
 })
 
 require("plugins.log").setup({
