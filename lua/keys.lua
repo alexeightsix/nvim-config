@@ -118,7 +118,6 @@ vim.keymap.set("n", "<leader>nc", function()
   vim.cmd("e init.lua")
 end)
 
---map :W to :w
 vim.cmd [[
   command! W write
 ]]
@@ -130,3 +129,6 @@ vim.fn.setreg("t", vim.api.nvim_replace_termcodes("oeval(\\Psy\\sh());\n<ESC>", 
 vim.keymap.set('n', '<leader>wt', function()
   require("plugins.lwt").switch()
 end)
+
+
+
