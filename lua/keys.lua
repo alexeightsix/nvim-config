@@ -39,9 +39,12 @@ vim.keymap.set("n", "<leader>ff", function()
   end
 end)
 
+vim.keymap.set("n", "<leader>tv", function()
+  require("lsp_lines").toggle()
+end)
 vim.keymap.set("n", "<leader>tt", function()
-  telescope.diagnostics({
-    initial_mode = "normal",
+  require("trouble").toggle({
+    position = "right",
   })
 end)
 
@@ -127,18 +130,3 @@ vim.fn.setreg("t", vim.api.nvim_replace_termcodes("oeval(\\Psy\\sh());\n<ESC>", 
 vim.keymap.set('n', '<leader>wt', function()
   require("plugins.lwt").switch()
 end)
-
-vim.keymap.set('n', 'M', function()
-  local harpoon = require("harpoon")
-  harpoon.ui:toggle_quick_menu(harpoon:list())
-end)
-
-vim.keymap.set('n', 'm', function()
-  require("harpoon"):list():append()
-end)
-
-for i = 1, 4 do
-  vim.keymap.set('n', 'm' .. i, function()
-    require("harpoon"):list():select(i)
-  end)
-end

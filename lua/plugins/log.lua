@@ -48,7 +48,7 @@ M.clear = function(reg)
 end
 
 M.setup = function(params)
-  local opts = M.merge(M.defaults, params)
+  local opts = M.merge(params, M.defaults)
   vim.api.nvim_create_autocmd("BufEnter", {
     group = vim.api.nvim_create_augroup("_log",
       {

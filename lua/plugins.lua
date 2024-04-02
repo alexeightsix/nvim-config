@@ -138,31 +138,33 @@ require("lazy").setup({
     event = "VeryLazy",
     cmd = "URLOpenUnderCursor",
     config = function()
-      local status_ok, url_open = pcall(require, "url-open")
+      local status_ok, _ = pcall(require, "url-open")
       if not status_ok then
         return
       end
       require('plugins.url');
     end,
   },
-  -- {
-  --   "iamcco/markdown-preview.nvim",
-  --   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-  --   build = "cd app && npm install",
-  --   init = function()
-  --     vim.g.mkdp_filetypes = { "markdown" }
-  --   end,
-  --   ft = { "markdown" },
-  -- },
-  --
   {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function()
+      require("lsp_lines").setup()
+    end
+  },
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+    },
   }
 })
 
 require("plugins.log").setup({
-  ["php"] = "print_r(x);",
-  ["lua"] = "print(x)",
-  ["js tsx"] = "console.log(x);",
+  register = "l",
+  mappings = {
+    ["go"] = "fmt.PrintLn(x)",
+    ["php"] = "var_dump(x);",
+    ["lua"] = "print(x)",
+    ["js tsx"] = "console.log(x);",
+  }
 })
