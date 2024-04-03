@@ -187,7 +187,7 @@ require("lazy").setup({
 require("plugins.log").setup({
   register = "l",
   mappings = {
-    ["go"] = "fmt.PrintLn(x)",
+    ["go"] = "fmt.Println(x)",
     ["php"] = "var_dump(x);",
     ["lua"] = "print(x)",
     ["js tsx"] = "console.log(x);",
