@@ -11,14 +11,15 @@ M.exec_get_string = function(cmd)
 end
 
 M.is_success = function(cmd)
-  local _, code, _ = os.execute(cmd .. " > /dev/null 2>&1")
-  return code == 0
+  local success = os.execute(cmd .. " > /dev/null 2>&1")
+  return success == 0
 end
 
 M.checkhealth = function()
   local binary = false
   local health = false
   local ok = M.is_success("which lazyworktree")
+
   if ok then
     binary = true
   end
