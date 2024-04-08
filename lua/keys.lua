@@ -39,9 +39,6 @@ vim.keymap.set("n", "<leader>ff", function()
   end
 end)
 
-vim.keymap.set("n", "<leader>tv", function()
-  require("lsp_lines").toggle()
-end)
 vim.keymap.set("n", "<leader>tt", function()
   require("trouble").toggle({
     position = "right",
@@ -129,6 +126,3 @@ vim.fn.setreg("t", vim.api.nvim_replace_termcodes("oeval(\\Psy\\sh());\n<ESC>", 
 vim.keymap.set('n', '<leader>wt', function()
   require("plugins.lwt").switch()
 end)
-
-
-

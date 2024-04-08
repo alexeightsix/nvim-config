@@ -2,8 +2,8 @@ local dap = require 'dap'
 local dapui = require 'dapui'
 
 vim.cmd [[
-autocmd FileType dapui* set statusline=\
-autocmd FileType dap-repl set statusline=\
+  autocmd FileType dapui* set statusline=\
+  autocmd FileType dap-repl set statusline=\
 ]]
 
 require('mason-nvim-dap').setup {

@@ -23,8 +23,13 @@ require("lazy").setup({
     priority = 5000,
     "Mofiqul/dracula.nvim",
     config = function()
-      vim.cmd([[colorscheme dracula]])
-      vim.cmd [[hi! Normal ctermbg=none ctermfg=none guifg=none guibg=none]]
+      vim.cmd [[
+        colorscheme dracula
+        hi! Normal ctermbg=none ctermfg=none guifg=none guibg=none
+        hi SpecialKey    guifg=#61AFEF
+        hi SpecialKeyWin guifg=#61AFEF
+        set winhighlight=SpecialKey:SpecialKeyWin
+      ]]
     end,
     lazy = false,
   },
@@ -146,42 +151,24 @@ require("lazy").setup({
     end,
   },
   {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    config = function()
-      require("lsp_lines").setup()
-      vim.diagnostic.config({ virtual_lines = false })
-    end
-  },
-  {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
     },
   },
   {
-    -- NOTE: Yes, you can install new plugins here!
     'mfussenegger/nvim-dap',
-    -- NOTE: And you can specify dependencies as well
     dependencies = {
-      -- Creates a beautiful debugger UI
       'rcarriga/nvim-dap-ui',
-
-      -- Required dependency for nvim-dap-ui
       'nvim-neotest/nvim-nio',
-
-      -- Installs the debug adapters for you
       'williamboman/mason.nvim',
       'jay-babu/mason-nvim-dap.nvim',
-
-      -- Add your own debuggers here
       'leoluz/nvim-dap-go',
     },
     config = function()
       require('plugins.dap')
     end,
   }
-
-
 })
 
 require("plugins.log").setup({

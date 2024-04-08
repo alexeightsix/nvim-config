@@ -13,6 +13,8 @@ require("telescope").setup({
       "yarn.lock",
       "package-lock.json",
       "lazy-lock.json",
+      ".min.js",
+      ".min.mjs",
       "*.sql",
       ".git/.*",
     },
