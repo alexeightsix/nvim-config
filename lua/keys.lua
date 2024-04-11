@@ -18,6 +18,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.lsp.buf.code_action()
     end)
 
+    vim.keymap.set("n", "<leader>fr", function()
+      telescope.lsp_references({
+        initial_mode = "normal",
+      })
+    end)
+
     vim.keymap.set("n", "gd", function()
       telescope.lsp_definitions({
         initial_mode = "normal",

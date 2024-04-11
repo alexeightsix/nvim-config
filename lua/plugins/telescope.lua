@@ -16,6 +16,7 @@ require("telescope").setup({
       ".min.js",
       ".min.mjs",
       "*.sql",
+      "composer.lock",
       ".git/.*",
     },
     preview = {
