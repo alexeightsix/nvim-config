@@ -34,13 +34,6 @@ require("lazy").setup({
     lazy = false,
   },
   {
-    "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
-    config = function()
-      require("plugins.lualine")
-    end,
-  },
-  {
     'nvim-telescope/telescope-fzf-native.nvim',
     build = 'make'
   },
