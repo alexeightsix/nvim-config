@@ -55,7 +55,7 @@ mason_lspconfig.setup {
     -- "nginx-language-server",
     "pyright",
     "tailwindcss",
-    "theme_check",
+    -- "theme_check",
     "tsserver",
     "vimls",
     "yamlls",
@@ -160,7 +160,7 @@ require('lspconfig').intelephense.setup({
   on_init = function(client)
     local res = vim.fn.filereadable(client.config.root_dir .. '/vendor/bin/pint')
 
-    client.server_capabilities.licenceKey = "00KQ0HSSOK9D0E7"
+    client.server_capabilities.licenceKey = "";
 
     if res == 1 then
       client.server_capabilities.documentFormattingProvider = false

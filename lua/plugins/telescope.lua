@@ -9,15 +9,16 @@ require("telescope").setup({
   },
   defaults = {
     file_ignore_patterns = {
-      "node_modules/.*",
-      "yarn.lock",
-      "package-lock.json",
-      "lazy-lock.json",
+      "*.sql",
+      ".git/.*",
       ".min.js",
       ".min.mjs",
-      "*.sql",
+      "ckeditor.jsx",
       "composer.lock",
-      ".git/.*",
+      "lazy-lock.json",
+      "node_modules/.*",
+      "package-lock.json",
+      "yarn.lock",
     },
     preview = {
       mime_hook = function(filepath, bufnr, opts)
