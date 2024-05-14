@@ -12,12 +12,11 @@ end
 
 M.is_success = function(cmd)
   local success = os.execute(cmd .. " > /dev/null 2>&1")
-  return success == 0
+  return success
 end
 
 M.checkhealth = function()
   local binary = false
-  local health = false
   local ok = M.is_success("which lazyworktree")
 
   if ok then
@@ -76,6 +75,7 @@ M.switch = function()
 
   pickers.new(dropdown, {
     prompt_title = "Switch to Worktree",
+    initial_mode = "normal",
     finder = finders.new_table {
       results = M.list_worktrees(),
       entry_maker = function(entry)

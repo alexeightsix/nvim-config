@@ -130,6 +130,7 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = "friendly-snippets" },
+    { name = "vim-dadbod-completion" },
     { name = 'path' },
     { name = 'buffer' }
   }
@@ -137,6 +138,13 @@ cmp.setup {
 
 vim.diagnostic.config({
   virtual_text = true
+})
+
+cmp.setup.filetype({ "sql" }, {
+  sources = {
+    { name = "vim-dadbod-completion" },
+    { name = "buffer" },
+  },
 })
 
 require "lsp_signature".setup({

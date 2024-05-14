@@ -146,8 +146,6 @@ require("lazy").setup({
   {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-    },
   },
   {
     'mfussenegger/nvim-dap',
@@ -161,6 +159,13 @@ require("lazy").setup({
     config = function()
       require('plugins.dap')
     end,
+  },
+  {
+    "tpope/vim-dadbod",
+    dependencies = {
+      "kristijanhusak/vim-dadbod-ui",
+      "kristijanhusak/vim-dadbod-completion",
+    }
   }
 })
 

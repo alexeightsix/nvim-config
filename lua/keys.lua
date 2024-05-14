@@ -103,8 +103,8 @@ end)
 
 vim.keymap.set("n", "<leader>fw", "<CMD>Telescope live_grep<CR>")
 
--- sidebar
 vim.keymap.set("n", "<leader>e", "<CMD>:NvimTreeToggle<CR>")
+vim.keymap.set("n", "<leader>d", "<CMD>:DBUIToggle<CR>")
 
 --git
 vim.keymap.set("n", "<leader>td", "<CMD>Gitsigns toggle_deleted<CR>")
