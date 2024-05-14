@@ -18,6 +18,7 @@ require("telescope").setup({
       "lazy-lock.json",
       "node_modules/.*",
       "package-lock.json",
+      "public/vendor/.*",
       "yarn.lock",
     },
     preview = {
