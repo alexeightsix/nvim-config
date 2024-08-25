@@ -166,6 +166,10 @@ require("lazy").setup({
       "kristijanhusak/vim-dadbod-ui",
       "kristijanhusak/vim-dadbod-completion",
     }
+  },
+  {
+    'j-hui/fidget.nvim',
+    opts = {}
   }
 })
 
