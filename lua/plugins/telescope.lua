@@ -19,6 +19,7 @@ require("telescope").setup({
       "node_modules/.*",
       "package-lock.json",
       "public/vendor/.*",
+      "_ide_helper.php",
       "yarn.lock",
     },
     preview = {

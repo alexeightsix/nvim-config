@@ -166,7 +166,15 @@ require("lazy").setup({
       "kristijanhusak/vim-dadbod-ui",
       "kristijanhusak/vim-dadbod-completion",
     }
-  }
+  },
+  {
+    "j-hui/fidget.nvim",
+    tag = "v1.0.0", -- Make sure to update this to something recent!
+    opts = {
+      -- options
+    },
+  },
+  "sindrets/diffview.nvim"
 })
 
 require("plugins.log").setup({

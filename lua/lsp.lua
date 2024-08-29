@@ -1,13 +1,14 @@
 local border = {
-  { "🭽", "FloatBorder" },
-  { "▔", "FloatBorder" },
-  { "🭾", "FloatBorder" },
-  { "▕", "FloatBorder" },
-  { "🭿", "FloatBorder" },
-  { "▁", "FloatBorder" },
-  { "🭼", "FloatBorder" },
-  { "▏", "FloatBorder" },
+      {"🭽", "FloatBorder"},
+      {"▔", "FloatBorder"},
+      {"🭾", "FloatBorder"},
+      {"▕", "FloatBorder"},
+      {"🭿", "FloatBorder"},
+      {"▁", "FloatBorder"},
+      {"🭼", "FloatBorder"},
+      {"▏", "FloatBorder"},
 }
+
 
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 
@@ -132,7 +133,7 @@ cmp.setup {
     { name = "friendly-snippets" },
     { name = "vim-dadbod-completion" },
     { name = 'path' },
-    { name = 'buffer' }
+    -- { name = 'buffer' }
   }
 }
 
@@ -143,7 +144,7 @@ vim.diagnostic.config({
 cmp.setup.filetype({ "sql" }, {
   sources = {
     { name = "vim-dadbod-completion" },
-    { name = "buffer" },
+    -- { name = "buffer" },
   },
 })
 
@@ -167,9 +168,6 @@ table.insert(null_ls_sources, null_ls.builtins.formatting.blade_formatter)
 require('lspconfig').intelephense.setup({
   on_init = function(client)
     local res = vim.fn.filereadable(client.config.root_dir .. '/vendor/bin/pint')
-
-    client.server_capabilities.licenceKey = "";
-
     if res == 1 then
       client.server_capabilities.documentFormattingProvider = false
       local pint = null_ls.builtins.formatting.pint.with {
@@ -189,10 +187,3 @@ require('lspconfig').on_attach = function()
     sources = null_ls_sources
   })
 end
-
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = { "*.tf", "*.tfvars" },
-  callback = function()
-    vim.lsp.buf.format()
-  end,
-})
