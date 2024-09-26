@@ -49,15 +49,6 @@ require("lazy").setup({
     end,
   },
   {
-    "nvim-tree/nvim-tree.lua",
-    config = function()
-      require("plugins.nvim_tree")
-    end,
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
-  },
-  {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
@@ -148,6 +139,18 @@ require("lazy").setup({
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   {
+    'stevearc/oil.nvim',
+    config = function()
+      require("plugins.oil")
+    end,
+    dependencies = { {
+      "echasnovski/mini.icons",
+      opts = {
+
+      }
+    } },
+  },
+  {
     'mfussenegger/nvim-dap',
     dependencies = {
       'rcarriga/nvim-dap-ui',
@@ -159,13 +162,6 @@ require("lazy").setup({
     config = function()
       require('plugins.dap')
     end,
-  },
-  {
-    "tpope/vim-dadbod",
-    dependencies = {
-      "kristijanhusak/vim-dadbod-ui",
-      "kristijanhusak/vim-dadbod-completion",
-    }
   },
   {
     'j-hui/fidget.nvim',

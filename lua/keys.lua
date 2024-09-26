@@ -6,6 +6,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.lsp.buf.hover()
     end)
 
+    vim.keymap.set('n', '<leader>rn', function()
+      vim.lsp.buf.rename()
+    end)
+
     vim.keymap.set("n", "<leader>fd", function()
       vim.lsp.buf.format(
         {
@@ -23,6 +27,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
         initial_mode = "normal",
       })
     end)
+
+    vim.keymap.set("n", "<leader>wd", function()
+      telescope.diagnostics({
+        initial_mode = "normal",
+      })
+    end)
+
 
     vim.keymap.set("n", "gd", function()
       telescope.lsp_definitions({
@@ -51,7 +62,7 @@ vim.keymap.set("n", "<leader>tt", function()
   })
 end)
 
-vim.keymap.set("n", "<leader>r", function()
+vim.keymap.set("n", "<leader>rg", function()
   telescope.registers({
     initial_mode = "normal",
   })
@@ -103,8 +114,24 @@ end)
 
 vim.keymap.set("n", "<leader>fw", "<CMD>Telescope live_grep<CR>")
 
-vim.keymap.set("n", "<leader>e", "<CMD>:NvimTreeToggle<CR>")
-vim.keymap.set("n", "<leader>d", "<CMD>:DBUIToggle<CR>")
+-- vim.keymap.set("n", "<leader>e", "<CMD>:NvimTreeToggle<CR>")
+vim.api.nvim_create_user_command("OilToggle", function()
+  local current_buf = vim.api.nvim_get_current_buf()
+  local current_filetype = vim.api.nvim_buf_get_option(current_buf, "filetype")
+  local git_root_path =
+      require("plenary.job"):new({ command = "git", args = { "rev-parse", "--show-toplevel" } }):sync()[1]
+  if current_filetype == "oil" then
+    require("oil").toggle_float()
+  else
+    -- Open oil if not already in an oil buffer
+    require("oil").toggle_float()
+  end
+end, { nargs = 0 })
+
+
+vim.keymap.set("n", "<leader>e", "<CMD>:OilToggle<CR>")
+
+vim.keymap.set("n", "<leader>db", "<CMD>:DBUIToggle<CR>")
 
 --git
 vim.keymap.set("n", "<leader>td", "<CMD>Gitsigns toggle_deleted<CR>")

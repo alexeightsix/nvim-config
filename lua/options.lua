@@ -42,3 +42,6 @@ vim.opt.updatetime = 300                   -- faster completion
 vim.opt.wrap = false                       -- display lines as one long line
 vim.opt.writebackup = false                -- if a file is being edited by another program (or was written to file while editing with another program) it is not allowed to be edited
 -- vim.opt.shada = "!,'10,f1,<50,s10,h"       -- default value as of Neovim 0.10
+--
+
+vim.g.loaded_netrwPlugin = 0

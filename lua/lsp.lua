@@ -43,22 +43,22 @@ local servers = {
 
 mason_lspconfig.setup {
   ensure_installed = {
-    "bashls",
+    -- "bashls",
     -- "blade_formatter",
-    "docker_compose_language_service",
-    "dockerls",
-    "eslint",
-    "gopls",
-    "html",
-    "intelephense",
-    "lua_ls",
+    -- "docker_compose_language_service",
+    -- "dockerls",
+    -- "eslint",
+    -- "gopls",
+    -- "html",
+    -- "intelephense",
+    -- "lua_ls",
     -- "nginx-language-server",
-    "pyright",
-    "tailwindcss",
+    -- "pyright",
+    -- "tailwindcss",
     -- "theme_check",
-    "tsserver",
-    "vimls",
-    "yamlls",
+    -- "ts_ls",
+    -- "vimls",
+    -- "yamlls",
   },
 }
 
@@ -165,6 +165,14 @@ table.insert(null_ls_sources, null_ls.builtins.formatting.prettier.with {
 table.insert(null_ls_sources, null_ls.builtins.formatting.blade_formatter)
 
 require('lspconfig').intelephense.setup({
+  files = {
+    '**/.git/**',
+    '**/node_modules/**',
+    '**/vendor/**/{Test,test,Tests,tests}/**/*Test.php',
+    '**/vendor/composer/*',
+    '**/vendor/faker/*',
+    maxSize = 100000,
+  },
   on_init = function(client)
     local res = vim.fn.filereadable(client.config.root_dir .. '/vendor/bin/pint')
 
