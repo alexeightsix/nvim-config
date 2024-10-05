@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.lsp.buf.code_action()
     end)
 
-    vim.keymap.set("n", "<leader>fr", function()
+    vim.keymap.set("n", "<leader>fr", function() -- find references
       telescope.lsp_references({
         initial_mode = "normal",
       })
@@ -150,6 +150,7 @@ end)
 
 vim.cmd [[
   command! W write
+  command! Bd bdelete
 ]]
 
 vim.api.nvim_set_keymap("i", "<C-A-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })

@@ -6,13 +6,13 @@ vim.cmd [[
   autocmd FileType dap-repl set statusline=\
 ]]
 
-require('mason-nvim-dap').setup {
-  automatic_setup = true,
-  handlers = {},
-  ensure_installed = {
-    'delve',
-  },
-}
+-- require('mason-nvim-dap').setup {
+--   automatic_setup = true,
+--   handlers = {},
+--   ensure_installed = {
+--     -- 'delve',
+--   },
+-- }
 
 vim.keymap.set('n', '<F7>', dapui.toggle)
 vim.keymap.set('n', '<F5>', dap.continue)
