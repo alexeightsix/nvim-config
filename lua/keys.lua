@@ -35,6 +35,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end)
 
 
+    vim.api.nvim_set_keymap("n", "<Leader>ls", ":LspRestart <CR>", { silent = true, noremap = true })
+
+    vim.keymap.set("n", "<leader>fs", function()
+        telescope.lsp_document_symbols()
+    end)
+
     vim.keymap.set("n", "gd", function()
       telescope.lsp_definitions({
         initial_mode = "normal",
@@ -44,6 +50,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 vim.keymap.set("n", "gd", "<Nop>")
+
+vim.api.nvim_set_keymap("n", "<Leader>gh", ":OpenInGHFileLines <CR>", { silent = true, noremap = true })
 
 vim.keymap.set("n", "<leader>ff", function()
   vim.fn.system("git rev-parse --is-inside-work-tree")
@@ -55,6 +63,8 @@ vim.keymap.set("n", "<leader>ff", function()
     telescope.find_files()
   end
 end)
+
+
 
 vim.keymap.set("n", "<leader>tt", function()
   require("trouble").toggle({
@@ -69,7 +79,17 @@ vim.keymap.set("n", "<leader>rg", function()
 end)
 
 vim.keymap.set("n", "<leader>t", "<CMD>lua vim.diagnostic.open_float(0, {scope='line'})<CR>")
-vim.keymap.set("n", "<S-Tab>", "<CMD>:cn<CR>")
+
+local function cycle_quickfix()
+  local quickfix_list = vim.fn.getqflist()
+  local current_idx = vim.fn.getqflist({ idx = 0 }).idx
+  if current_idx == #quickfix_list then
+    vim.cmd('cc 1')
+  else
+    vim.cmd('cc ' .. (current_idx + 1))
+  end
+end
+vim.keymap.set('n', '<S-Tab>', cycle_quickfix, { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>faf", function()
   telescope.find_files({
@@ -114,7 +134,6 @@ end)
 
 vim.keymap.set("n", "<leader>fw", "<CMD>Telescope live_grep<CR>")
 
--- vim.keymap.set("n", "<leader>e", "<CMD>:NvimTreeToggle<CR>")
 vim.api.nvim_create_user_command("OilToggle", function()
   local current_buf = vim.api.nvim_get_current_buf()
   local current_filetype = vim.api.nvim_buf_get_option(current_buf, "filetype")
@@ -130,8 +149,6 @@ end, { nargs = 0 })
 
 
 vim.keymap.set("n", "<leader>e", "<CMD>:OilToggle<CR>")
-
-vim.keymap.set("n", "<leader>db", "<CMD>:DBUIToggle<CR>")
 
 --git
 vim.keymap.set("n", "<leader>td", "<CMD>Gitsigns toggle_deleted<CR>")
@@ -155,8 +172,3 @@ vim.cmd [[
 
 vim.api.nvim_set_keymap("i", "<C-A-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
-vim.fn.setreg("t", vim.api.nvim_replace_termcodes("oeval(\\Psy\\sh());\n<ESC>", true, true, true))
-
-vim.keymap.set('n', '<leader>wt', function()
-  require("plugins.lwt").switch()
-end)

@@ -1,3 +1,5 @@
+local conf = require('telescope.config').values
+
 require("telescope").setup({
   extensions = {
     fzf = {
@@ -7,8 +9,11 @@ require("telescope").setup({
       case_mode = "smart_case",
     }
   },
+-- https://www.reddit.com/r/neovim/comments/17j970c/telescope_live_grep_doesnt_escape_special/
+  vimgrep_arguments = table.insert(conf.vimgrep_arguments, '--fixed-strings'),
   defaults = {
     file_ignore_patterns = {
+      -- ".null-ls*",
       "*.sql",
       ".git/.*",
       ".min.js",
@@ -20,6 +25,7 @@ require("telescope").setup({
       "package%-lock.json",
       "public/vendor/.*",
       "yarn.lock",
+      "cmd/api/docs/.*",
     },
     preview = {
       mime_hook = function(filepath, bufnr, opts)

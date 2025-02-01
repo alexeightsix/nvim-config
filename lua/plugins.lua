@@ -55,7 +55,6 @@ require("lazy").setup({
       require("plugins.treesitter")
     end,
   },
-  "virchau13/tree-sitter-astro",
   "mbbill/undotree",
   {
     "lewis6991/gitsigns.nvim",
@@ -138,6 +137,7 @@ require("lazy").setup({
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
+  "almo7aya/openingh.nvim",
   {
     'stevearc/oil.nvim',
     config = function()
@@ -166,8 +166,15 @@ require("lazy").setup({
   {
     'j-hui/fidget.nvim',
     opts = {}
-  }
+  },
+  {
+    'dmmulroy/ts-error-translator.nvim'
+  },
+  "tpope/vim-abolish",
+  "tpope/vim-dadbod",
 })
+
+require("ts-error-translator").setup()
 
 require("plugins.log").setup({
   register = "l",
@@ -175,6 +182,8 @@ require("plugins.log").setup({
     ["go"] = "fmt.Println(x)",
     ["php"] = "var_dump(x);",
     ["lua"] = "print(x)",
-    ["js tsx"] = "console.log(x);",
+    ["ts"] = "console.log(x);",
+    ["js"] = "console.log(x);",
+    ["tsx"] = "console.log(x);",
   }
 })

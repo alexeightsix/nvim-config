@@ -43,16 +43,12 @@ local servers = {
 
 mason_lspconfig.setup {
   ensure_installed = {
-    -- "bashls",
-    -- "blade_formatter",
-    -- "docker_compose_language_service",
-    -- "dockerls",
-    -- "eslint",
+    -- "delve",
     -- "gopls",
-    -- "html",
     -- "intelephense",
     -- "lua_ls",
-    -- "nginx-language-server",
+    -- "eslint",
+    -- "html",
     -- "pyright",
     -- "tailwindcss",
     -- "theme_check",
@@ -93,9 +89,9 @@ end
 
 cmp.setup {
   snippet = {
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body)
-    end,
+    -- expand = function(args)
+    --   -- require('luasnip').lsp_expand(args.body)
+    -- end,
   },
   window = {
     completion = cmp.config.window.bordered(),
@@ -128,9 +124,9 @@ cmp.setup {
   }),
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-    { name = "friendly-snippets" },
-    { name = "vim-dadbod-completion" },
+    -- { name = 'luasnip' },
+    -- { name = "friendly-snippets" },
+    -- { name = "vim-dadbod-completion" },
     { name = 'path' },
     { name = 'buffer' }
   }
@@ -204,3 +200,9 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     vim.lsp.buf.format()
   end,
 })
+
+ require('lspconfig')["astro"].setup({
+   capabilities = capabilities,
+   on_attach = on_attach,
+   filetypes = { "astro" },
+  })

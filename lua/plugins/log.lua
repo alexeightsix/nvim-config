@@ -5,7 +5,8 @@ M.defaults = {
   mappings = {
     ["php"] = "var_dump(x);",
     ["lua"] = "print(x)",
-    ["js tsx"] = "console.log(x);",
+    ["js"] = "console.log(x);",  -- Use "js" for JavaScript
+    ["tsx"] = "console.log(x);",  -- Ensure TSX has its own entry
   }
 }
 
@@ -14,18 +15,13 @@ M.escape = function(str)
 end
 
 M.get = function(dict, ext)
-  for key, value in pairs(dict) do
-    local q = string.find(key, ext)
-    if (q ~= nil) then
-      return value
-    end
-  end
+  return dict[ext] or dict[ext:match("^(%S+)")]  -- Match single words or whole
 end
 
 M.parse = function(str)
-  local _, _, _start = string.find(str, "(.*)[x]")
-  local _, _, _end = string.find(str, "[x](.*)")
-  return _start, _end
+  local _start = str:match("^(.*)[x]")  -- Capture everything before 'x'
+  local _end = str:match("[x](.*)")      -- Capture everything after 'x'
+  return _start or "", _end or ""        -- Return empty strings if no match
 end
 
 M.merge = function(a, b)
@@ -50,17 +46,13 @@ end
 M.setup = function(params)
   local opts = M.merge(params, M.defaults)
   vim.api.nvim_create_autocmd("BufEnter", {
-    group = vim.api.nvim_create_augroup("_log",
-      {
-        clear = true
-      }
-    ),
+    group = vim.api.nvim_create_augroup("_log", { clear = true }),
     pattern = "*",
     nested = true,
     callback = function()
       M.clear(opts.register)
       local query = M.get(opts.mappings, vim.bo.filetype)
-      if (query ~= nil) then
+      if query then
         local _start, _end = M.parse(query)
         local key = M.escape("yiWo" .. _start .. "<ESC>pa" .. _end .. "<CR><ESC>")
         M.set(opts.register, key)
@@ -70,3 +62,4 @@ M.setup = function(params)
 end
 
 return M
+
