@@ -1,9 +1,14 @@
 local telescope = require("telescope.builtin")
+local print_ln = require("plugins.log")
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function()
 		vim.keymap.set("n", "<S-k>", function()
 			vim.lsp.buf.hover()
+		end)
+
+		vim.keymap.set("n", "@l", function()
+			print_ln.setup()
 		end)
 
 		vim.keymap.set("n", "<leader>rn", function()
@@ -43,6 +48,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end)
 	end,
 })
+
+vim.keymap.set("n", "@cn", function()
+	local line = vim.api.nvim_get_current_line()
+	local new_line = line:gsub('className="([^"]+)"', 'className={cn("%1")}')
+	vim.api.nvim_set_current_line(new_line)
+end)
 
 vim.keymap.set("n", "gd", "<Nop>")
 

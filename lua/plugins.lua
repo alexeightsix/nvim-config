@@ -159,15 +159,3 @@ require("lazy").setup({
 })
 
 require("ts-error-translator").setup()
-
-require("plugins.log").setup({
-	register = "l",
-	mappings = {
-		["go"] = "fmt.Println(x)",
-		["php"] = "var_dump(x);",
-		["lua"] = "print(x)",
-		["ts"] = "console.log(x);",
-		["js"] = "console.log(x);",
-		["tsx"] = "console.log(x);",
-	},
-})

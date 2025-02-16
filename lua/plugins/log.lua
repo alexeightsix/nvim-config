@@ -1,65 +1,72 @@
 local M = {}
 
+M.set_cursor = function()
+	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>1jA", true, false, true), "n", false)
+end
+
+M.handle_php = function()
+	vim.fn.append(vim.fn.line("."), "\tprint_r(" .. M.get_word() .. ");")
+	M.set_cursor()
+end
+
+M.get_word = function()
+	return vim.fn.expand("<cword>")
+end
+
+M.handle_tsx = function()
+	vim.fn.append(vim.fn.line("."), "\tconsole.log(" .. M.get_word() .. ");")
+	M.set_cursor()
+end
+
+M.handle_go = function()
+	local word = M.get_word()
+	local new_text = "\tfmt.Println(" .. word .. ")"
+
+	vim.fn.append(vim.fn.line("."), new_text)
+
+	local errors = vim.diagnostic.get(0)
+
+	if errors == nil then
+		return
+	end
+
+	local params = vim.lsp.util.make_range_params()
+
+	params.context = { only = { "source.organizeImports" } }
+
+	local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
+
+	for cid, res in pairs(result or {}) do
+		for _, r in pairs(res.result or {}) do
+			if r.edit then
+				local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+				vim.lsp.util.apply_workspace_edit(r.edit, enc)
+			end
+		end
+	end
+
+	M.set_cursor()
+end
+
+M.get_file_extension = function()
+	return vim.fn.expand("%:e")
+end
+
 M.defaults = {
-  register = "l",
-  mappings = {
-    ["php"] = "var_dump(x);",
-    ["lua"] = "print(x)",
-    ["js"] = "console.log(x);",  -- Use "js" for JavaScript
-    ["tsx"] = "console.log(x);",  -- Ensure TSX has its own entry
-  }
+	["go"] = M.handle_go,
+	["tsx"] = M.handle_tsx,
+	["jsx"] = M.handle_tsx,
+	["php"] = M.handle_php,
 }
 
-M.escape = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
+M.setup = function()
+	local callback = M.defaults[M.get_file_extension()]
 
-M.get = function(dict, ext)
-  return dict[ext] or dict[ext:match("^(%S+)")]  -- Match single words or whole
-end
-
-M.parse = function(str)
-  local _start = str:match("^(.*)[x]")  -- Capture everything before 'x'
-  local _end = str:match("[x](.*)")      -- Capture everything after 'x'
-  return _start or "", _end or ""        -- Return empty strings if no match
-end
-
-M.merge = function(a, b)
-  for k, v in pairs(b) do
-    if type(v) == 'table' and type(a[k] or false) == 'table' then
-      M.merge(a[k], v)
-    else
-      a[k] = v
-    end
-  end
-  return a
-end
-
-M.set = function(reg, str)
-  vim.fn.setreg(reg, str)
-end
-
-M.clear = function(reg)
-  vim.fn.setreg(reg, "")
-end
-
-M.setup = function(params)
-  local opts = M.merge(params, M.defaults)
-  vim.api.nvim_create_autocmd("BufEnter", {
-    group = vim.api.nvim_create_augroup("_log", { clear = true }),
-    pattern = "*",
-    nested = true,
-    callback = function()
-      M.clear(opts.register)
-      local query = M.get(opts.mappings, vim.bo.filetype)
-      if query then
-        local _start, _end = M.parse(query)
-        local key = M.escape("yiWo" .. _start .. "<ESC>pa" .. _end .. "<CR><ESC>")
-        M.set(opts.register, key)
-      end
-    end
-  })
+	if callback then
+		callback()
+	else
+		vim.notify("printLn: Unsupported file type", vim.log.levels.ERROR)
+	end
 end
 
 return M
-
