@@ -28,6 +28,7 @@ require("telescope").setup({
       "cmd/api/docs/.*",
     },
     preview = {
+      filesize_limit = 0.5555,
       mime_hook = function(filepath, bufnr, opts)
         local is_image = function(filepath)
           local image_extensions = { "png", "jpg", "gif" } -- Supported image formats
