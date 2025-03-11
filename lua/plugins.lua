@@ -92,9 +92,6 @@ require("lazy").setup({
 	},
 	{
 		"github/copilot.vim",
-		config = function()
-			require("plugins.copilot")
-		end,
 	},
 	{
 		"NvChad/nvim-colorizer.lua",
@@ -156,6 +153,7 @@ require("lazy").setup({
 		"stevearc/conform.nvim",
 		opts = {},
 	},
+	"boltlessengineer/sense.nvim",
 })
 
 require("ts-error-translator").setup()

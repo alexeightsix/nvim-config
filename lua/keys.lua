@@ -29,6 +29,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			})
 		end)
 
+		vim.keymap.set("n", "@cn", function()
+			local line = vim.api.nvim_get_current_line()
+			local new_line = line:gsub('className="([^"]+)"', 'className={cn("%1")}')
+			vim.api.nvim_set_current_line(new_line)
+
+			ft = vim.api.nvim_buf_get_option(0, "filetype")
+
+			if ft == "typescriptreact" then
+				vim.lsp.buf.code_action({
+					apply = true,
+					context = { only = { "source.addMissingImports.ts" }, diagnostics = {} },
+				})
+			end
+		end)
+
 		vim.keymap.set("n", "<leader>wd", function()
 			telescope.diagnostics({
 				initial_mode = "normal",
@@ -48,12 +63,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end)
 	end,
 })
-
-vim.keymap.set("n", "@cn", function()
-	local line = vim.api.nvim_get_current_line()
-	local new_line = line:gsub('className="([^"]+)"', 'className={cn("%1")}')
-	vim.api.nvim_set_current_line(new_line)
-end)
 
 vim.keymap.set("n", "gd", "<Nop>")
 
@@ -167,11 +176,11 @@ vim.keymap.set("n", "<leader>nc", function()
 	vim.cmd("cd ~/.config/nvim")
 	vim.cmd("e init.lua")
 end)
-
 vim.cmd([[
   command! W write
   command! Bd bdelete
 ]])
 
 vim.api.nvim_set_keymap("i", "<C-A-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })

@@ -1,7 +1,7 @@
 local M = {}
 
 M.set_cursor = function()
-	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>1jA", true, false, true), "n", false)
+	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>1jo<Esc>_", true, false, true), "n", false)
 end
 
 M.handle_php = function()
