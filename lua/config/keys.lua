@@ -1,5 +1,5 @@
 local telescope = require("telescope.builtin")
-local print_ln = require("custom-plugins.log")
+local print_ln = require("custom.log")
 
 vim.api.nvim_create_autocmd("LspAttach", {
 
