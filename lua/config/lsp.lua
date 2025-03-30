@@ -31,13 +31,25 @@ vim.lsp.config("*", {
   handlers = handlers,
 })
 
-vim.lsp.enable({
-  "astro_ls",         -- npm install -g @astrojs/language-server
-  "cssls",         -- npm i -g vscode-langservers-extracted
-  "eslint",        -- npm i -g vscode-langservers-extracted
-  "gopls",            -- go get golang.org/x/tools/gopls@latest
-  "intelephense",  -- npm i -g intelephense
-  "lua_ls",        -- dnf copr enable yorickpeterse/lua-language-server && dnf install lua-language-server
-  "tailwindcss",   -- npm i -g tailwindcss-language-server
-  "ts_ls",         -- npm i -g typescript typescript-language-server
-})
+local lsp_servers = {
+  astro_ls = "npm i -g @astrojs/language-server",
+  cssls = "npm i -g vscode-langservers-extracted",
+  eslint = "npm i -g vscode-langservers-extracted",
+  gopls = "go install golang.org/x/tools/gopls@latest",
+  intelephense = "npm i -g intelephense",
+  lua_ls = "dnf copr enable yorickpeterse/lua-language-server && dnf install lua-language-server",
+  tailwindcss = "npm i -g tailwindcss-language-server",
+  ts_ls = "npm i -g typescript typescript-language-server"
+}
+
+vim.lsp.enable(vim.tbl_keys(lsp_servers))
+
+vim.api.nvim_create_user_command(
+  'LSPInstallServers',
+  function()
+    for _, cmd in pairs(lsp_servers) do
+      os.execute(cmd)
+    end
+  end,
+  {}
+)
