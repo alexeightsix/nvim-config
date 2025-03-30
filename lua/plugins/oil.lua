@@ -1,7 +1,7 @@
 return {
-		"stevearc/oil.nvim",
-    opts = {
-  default_file_explorer = true,
+  "stevearc/oil.nvim",
+  opts = {
+    default_file_explorer = true,
     columns = {
       "icon",
       -- "permissions",
@@ -178,12 +178,12 @@ return {
     keymaps_help = {
       border = "rounded",
     },
-    },
-		dependencies = { 
-      {
-			"echasnovski/mini.icons",
-			opts = {
+  },
+  dependencies = {
+    {
+      "echasnovski/mini.icons",
+      opts = {
       },
-		} 
+    }
   }
 }
