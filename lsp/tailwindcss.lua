@@ -1,4 +1,5 @@
 return {
+  autostart = false,
   cmd = { 'tailwindcss-language-server', '--stdio' },
   filetypes = {
     'astro',
@@ -50,6 +51,7 @@ return {
     },
   },
   root_markers = {
+    './app/app.css',
     'tailwind.config.js',
     'tailwind.config.cjs',
     'tailwind.config.mjs',
