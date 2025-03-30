@@ -2,7 +2,6 @@ local telescope = require("telescope.builtin")
 local print_ln = require("custom.log")
 
 vim.api.nvim_create_autocmd("LspAttach", {
-
   callback = function()
     vim.keymap.set("n", "<S-k>", function()
       vim.lsp.buf.hover()
@@ -39,7 +38,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       local new_line = line:gsub('className="([^"]+)"', 'className={cn("%1")}')
       vim.api.nvim_set_current_line(new_line)
 
-      ft = vim.api.nvim_buf_get_option(0, "filetype")
+      local ft = vim.api.nvim_buf_get_option(0, "filetype")
 
       if ft == "typescriptreact" then
         vim.lsp.buf.code_action({
@@ -155,12 +154,9 @@ vim.keymap.set("n", "<leader>fw", "<CMD>Telescope live_grep<CR>")
 vim.api.nvim_create_user_command("OilToggle", function()
   local current_buf = vim.api.nvim_get_current_buf()
   local current_filetype = vim.api.nvim_buf_get_option(current_buf, "filetype")
-  local git_root_path =
-      require("plenary.job"):new({ command = "git", args = { "rev-parse", "--show-toplevel" } }):sync()[1]
   if current_filetype == "oil" then
     require("oil").toggle_float()
   else
-    -- Open oil if not already in an oil buffer
     require("oil").toggle_float()
   end
 end, { nargs = 0 })
