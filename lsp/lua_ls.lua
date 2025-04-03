@@ -1,5 +1,7 @@
+local p = require("utils").mason_path
+
 return {
-  cmd = { 'lua-language-server' },
+  cmd = { p('lua-language-server') },
   filetypes = { 'lua' },
   root_markers = {
     '.luacheckrc',

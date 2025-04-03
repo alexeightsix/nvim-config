@@ -1,3 +1,5 @@
+local p = require("utils").mason_path
+
 -- https://github.com/onosendi/dotfiles/tree/45bc8f59daa8810324187b7d9ffb3cf0bea9b2e8/.config/nvim
 local function get_workspace_folder()
   local root = vim.fn.getcwd()
@@ -56,9 +58,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 return {
-  cmd = { "vscode-eslint-language-server", "--stdio" },
+  cmd = { p("vscode-eslint-language-server"), "--stdio" },
   filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
-  root_markers = { ".eslintrc.json", "package.json", "tsconfig.json", ".git" },
+  root_markers = {
+    "eslint.config.js",
+    ".eslintrc.json",
+    "package.json",
+    "tsconfig.json",
+    ".git"
+  },
   settings = {
     codeAction = {
       disableRuleComment = {

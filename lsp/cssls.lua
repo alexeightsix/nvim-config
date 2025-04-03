@@ -1,9 +1,11 @@
+local p = require("utils").mason_path
+
 return {
   cmd = {
-    'vscode-css-language-server', '--stdio'
+    p('vscode-css-language-server'), '--stdio'
   },
   filetypes = { 'css', 'scss' },
-  init_options = { provideFormatter = true },   -- needed to enable formatting capabilities
+  init_options = { provideFormatter = true }, -- needed to enable formatting capabilities
   root_markers = {
     'package.json',
   },

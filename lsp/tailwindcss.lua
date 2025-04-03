@@ -1,6 +1,8 @@
+local p = require("utils").mason_path
+
 return {
-  autostart = false,
-  cmd = { 'tailwindcss-language-server', '--stdio' },
+  autostart = true,
+  cmd = { p('tailwindcss-language-server'), '--stdio' },
   filetypes = {
     'astro',
     'blade',
@@ -25,6 +27,10 @@ return {
   },
   settings = {
     tailwindCSS = {
+      showPixelEquivalents = true,
+      rootFontSize = 16,
+      hovers = true,
+      suggestions = true,
       validate = true,
       lint = {
         cssConflict = 'warning',
@@ -43,9 +49,6 @@ return {
         'ngClass',
       },
       includeLanguages = {
-        eelixir = 'html-eex',
-        eruby = 'erb',
-        templ = 'html',
         htmlangular = 'html',
       },
     },

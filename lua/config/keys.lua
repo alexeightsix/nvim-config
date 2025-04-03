@@ -161,32 +161,28 @@ vim.api.nvim_create_user_command("OilToggle", function()
   end
 end, { nargs = 0 })
 
--- filetree
 vim.keymap.set("n", "<leader>e", "<CMD>:OilToggle<CR>")
 
---git
 vim.keymap.set("n", "<leader>td", "<CMD>Gitsigns toggle_deleted<CR>")
+
 vim.keymap.set("n", "<leader>bl", "<CMD>Gitsigns blame_line<CR>")
 
--- url
 vim.keymap.set("n", "gx", "<CMD>URLOpenUnderCursor<CR>")
 
--- undotree
 vim.keymap.set("n", "<leader>ut", "<CMD>:UndotreeToggle<CR>")
 
--- config
 vim.keymap.set("n", "<leader>nc", function()
   vim.cmd("cd ~/.config/nvim")
   vim.cmd("e init.lua")
 end)
 
--- remap
+vim.api.nvim_set_keymap("i", "<C-A-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+
+vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+
+vim.keymap.set('n', '<leader>r', '<cmd>lua require("spectre").toggle()<CR>')
+
 vim.cmd([[
   command! W write
   command! Bd bdelete
 ]])
-
--- copilot
-vim.api.nvim_set_keymap("i", "<C-A-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
-
-vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })

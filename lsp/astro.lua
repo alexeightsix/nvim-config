@@ -1,5 +1,7 @@
+local p = require("utils").mason_path
+
 return {
-  cmd = { "astro-ls", "--stdio" },
+  cmd = { p("astro-ls"), "--stdio" },
   root_markers = {
     "package.json",
     "tsconfig.json",
