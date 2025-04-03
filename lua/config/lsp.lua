@@ -36,7 +36,7 @@ local lsp_servers = {
   -- "cssls",
   -- "docker_compose_language_service",
   -- "dockerls",
-  -- "eslint",
+  "eslint",
   "gopls",
   "intelephense",
   -- "pyright",
