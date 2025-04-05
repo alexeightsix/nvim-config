@@ -44,6 +44,17 @@ vim.opt.writebackup = false                -- if a file is being edited by anoth
 
 vim.diagnostic.config({
   virtual_text = true,
+  float = false,
+  jump = {
+    float = false,
+  },
+  update_in_insert = false,
 })
 
+
 vim.g.loaded_netrwPlugin = 0
+vim.api.nvim_set_hl(0, "GitConflictCurrent", { bg = "#4a8c89", fg = "#e0e0e0" })
+vim.api.nvim_set_hl(0, "GitConflictIncoming", { bg = "#4a7bb5", fg = "#e0e0e0" })
+vim.api.nvim_set_hl(0, "GitConflictAncestor", { bg = "#b0b0b0", fg = "#333333" })
+vim.api.nvim_set_hl(0, "GitConflictCurrentLabel", { fg = "#e0e0e0", bg = "#4a8c89", bold = true })
+vim.api.nvim_set_hl(0, "GitConflictIncomingLabel", { fg = "#e0e0e0", bg = "#4a7bb5", bold = true })

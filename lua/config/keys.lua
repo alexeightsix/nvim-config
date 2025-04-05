@@ -1,8 +1,12 @@
 local telescope = require("telescope.builtin")
 local print_ln = require("custom.log")
 
+
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function()
+    vim.keymap.set("n", "g]", vim.diagnostic.goto_next({ float = false, silent = true }))
+    vim.keymap.set("n", "g[", vim.diagnostic.goto_prev({ float = false, silent = true }))
+
     vim.keymap.set("n", "<S-k>", function()
       vim.lsp.buf.hover()
     end)
@@ -97,16 +101,15 @@ end)
 
 vim.keymap.set("n", "<leader>t", "<CMD>lua vim.diagnostic.open_float(0, {scope='line'})<CR>")
 
-local function cycle_quickfix()
+vim.keymap.set("n", "<S-Tab>", function()
   local quickfix_list = vim.fn.getqflist()
-  local current_idx = vim.fn.getqflist({ idx = 0 }).idx
+  local current_idx = vim.fn.getqflist({}).idx
   if current_idx == #quickfix_list then
     vim.cmd("cc 1")
   else
     vim.cmd("cc " .. (current_idx + 1))
   end
-end
-vim.keymap.set("n", "<S-Tab>", cycle_quickfix, { noremap = true, silent = true })
+end, { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>faf", function()
   telescope.find_files({

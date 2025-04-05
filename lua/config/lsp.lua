@@ -49,5 +49,4 @@ require("mason-lspconfig").setup {
   ensure_installed = lsp_servers,
 }
 
-
 vim.lsp.enable(lsp_servers)
