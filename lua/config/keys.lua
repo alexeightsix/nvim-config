@@ -2,11 +2,28 @@ local telescope = require("telescope.builtin")
 local print_ln = require("custom.log")
 
 
+vim.keymap.set("n", "g]", function()
+  local current_pos = vim.api.nvim_win_get_cursor(0)
+  local diagnostics = vim.diagnostic.get(0)
+  local target_diag
+
+  for _, d in ipairs(diagnostics) do
+    if d.lnum > current_pos[1] - 1 or (d.lnum == current_pos[1] - 1 and d.col > current_pos[2]) then
+      target_diag = d
+      break
+    end
+  end
+
+  if not target_diag and #diagnostics > 0 then
+    vim.api.nvim_win_set_cursor(0, { diagnostics[1].lnum + 1, diagnostics[1].col })
+  else
+    vim.diagnostic.jump({ float = false, wrap = false, count = 1 })
+  end
+end)
+
+
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function()
-    vim.keymap.set("n", "g]", vim.diagnostic.goto_next({ float = false, silent = true }))
-    vim.keymap.set("n", "g[", vim.diagnostic.goto_prev({ float = false, silent = true }))
-
     vim.keymap.set("n", "<S-k>", function()
       vim.lsp.buf.hover()
     end)
@@ -102,13 +119,13 @@ end)
 vim.keymap.set("n", "<leader>t", "<CMD>lua vim.diagnostic.open_float(0, {scope='line'})<CR>")
 
 vim.keymap.set("n", "<S-Tab>", function()
-  local quickfix_list = vim.fn.getqflist()
-  local current_idx = vim.fn.getqflist({}).idx
-  if current_idx == #quickfix_list then
-    vim.cmd("cc 1")
-  else
-    vim.cmd("cc " .. (current_idx + 1))
-  end
+local quickfix_list = vim.fn.getqflist()
+local current_idx = vim.fn.getqflist({ idx = 0 }).idx
+if current_idx == #quickfix_list then
+  vim.cmd("cc 1")
+else
+  vim.cmd("cc " .. (current_idx + 1))
+end
 end, { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>faf", function()
