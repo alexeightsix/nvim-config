@@ -1,13 +1,4 @@
-local p = require("utils").mason_path
-
--- https://github.com/onosendi/dotfiles/tree/45bc8f59daa8810324187b7d9ffb3cf0bea9b2e8/.config/nvim
-local function get_workspace_folder()
-  local root = vim.fn.getcwd()
-  return {
-    name = vim.fn.fnamemodify(root, ":t"),
-    uri = vim.uri_from_fname(root),
-  }
-end
+local utils = require("utils")
 
 local function set_keymap(opts)
   local mode = opts.mode or "n"
@@ -58,7 +49,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 return {
-  cmd = { p("vscode-eslint-language-server"), "--stdio" },
+  cmd = { utils.mason_path("vscode-eslint-language-server"), "--stdio" },
   filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
   root_markers = {
     "eslint.config.js",
@@ -96,6 +87,6 @@ return {
     useESLintClass = false,
     validate = "on",
     workingDirectory = { mode = "location" },
-    workspaceFolder = get_workspace_folder(),
+    workspaceFolder = utils.get_workspace_folder(),
   }
 }

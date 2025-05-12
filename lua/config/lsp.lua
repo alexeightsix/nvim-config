@@ -42,6 +42,7 @@ local lsp_servers = {
   -- "pyright",
   "lua_ls",
   "tailwindcss",
+  "templ",
   "ts_ls",
 }
 

@@ -11,6 +11,7 @@ return {
         'php',
         'tsx',
         'typescript',
+        'html',
       },
       auto_install = true,
       highlight = {

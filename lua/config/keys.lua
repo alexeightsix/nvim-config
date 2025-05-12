@@ -119,13 +119,13 @@ end)
 vim.keymap.set("n", "<leader>t", "<CMD>lua vim.diagnostic.open_float(0, {scope='line'})<CR>")
 
 vim.keymap.set("n", "<S-Tab>", function()
-local quickfix_list = vim.fn.getqflist()
-local current_idx = vim.fn.getqflist({ idx = 0 }).idx
-if current_idx == #quickfix_list then
-  vim.cmd("cc 1")
-else
-  vim.cmd("cc " .. (current_idx + 1))
-end
+  local quickfix_list = vim.fn.getqflist()
+  local current_idx = vim.fn.getqflist({ idx = 0 }).idx
+  if current_idx == #quickfix_list then
+    vim.cmd("cc 1")
+  else
+    vim.cmd("cc " .. (current_idx + 1))
+  end
 end, { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>faf", function()
@@ -196,13 +196,23 @@ vim.keymap.set("n", "<leader>nc", function()
   vim.cmd("e init.lua")
 end)
 
-vim.api.nvim_set_keymap("i", "<C-A-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+vim.api.nvim_set_keymap("i", "<C-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 
 vim.keymap.set('n', '<leader>r', '<cmd>lua require("spectre").toggle()<CR>')
+vim.keymap.set('n', '<leader>r', function()
+  require("spectre").toggle()
+end, { desc = "Replace in files" })
 
 vim.cmd([[
   command! W write
   command! Bd bdelete
 ]])
+
+local harpoon = require("harpoon")
+local harpoon_extensions = require("harpoon.extensions")
+harpoon:setup()
+harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
+vim.keymap.set("n", "<leader>ba", function() harpoon:list():add() end)
+vim.keymap.set("n", "<leader>fb", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
