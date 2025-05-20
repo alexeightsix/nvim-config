@@ -32,7 +32,7 @@ vim.lsp.config("*", {
 })
 
 local lsp_servers = {
-  -- "astro",
+  "astro",
   -- "cssls",
   -- "docker_compose_language_service",
   -- "dockerls",
