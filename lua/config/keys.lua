@@ -1,6 +1,6 @@
 local telescope = require("telescope.builtin")
 local print_ln = require("custom.log")
-
+local extensions = require("telescope").extensions
 
 vim.keymap.set("n", "g]", function()
   local current_pos = vim.api.nvim_win_get_cursor(0)
@@ -51,6 +51,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<leader>fr", function() -- find references
       telescope.lsp_references({
         initial_mode = "normal",
+        jump_type = "never",
       })
     end)
 
@@ -77,8 +78,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     vim.api.nvim_set_keymap("n", "<Leader>ls", ":LspRestart <CR>", { silent = true, noremap = true })
 
+
     vim.keymap.set("n", "<leader>fs", function()
-      telescope.lsp_document_symbols()
+      require("telescope.builtin").lsp_document_symbols({
+        truncate = false,
+        layout_strategy = "horizontal",
+        layout_config = {
+          preview_width = 0.5,
+        },
+      })
     end)
 
     vim.keymap.set("n", "gd", function()
@@ -169,7 +177,11 @@ vim.keymap.set("n", "<leader>fW", function()
   })
 end)
 
-vim.keymap.set("n", "<leader>fw", "<CMD>Telescope live_grep<CR>")
+vim.keymap.set("n", "<leader>fw", function()
+  extensions.live_grep_args.live_grep_args({
+    initial_mode = "normal",
+  })
+end)
 
 vim.api.nvim_create_user_command("OilToggle", function()
   local current_buf = vim.api.nvim_get_current_buf()

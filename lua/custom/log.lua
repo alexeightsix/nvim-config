@@ -20,7 +20,7 @@ end
 
 M.handle_go = function()
   local word = M.get_word()
-  local new_text = "\tfmt.Println(" .. word .. ")"
+  local new_text = "\tgodump.Dump(" .. word .. ")"
 
   vim.fn.append(vim.fn.line("."), new_text)
 

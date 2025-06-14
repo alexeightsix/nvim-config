@@ -1,10 +1,11 @@
 return {
   "nvim-telescope/telescope.nvim",
-  version = "0.1.x",
+  branch = "master",
   lazy = true,
   dependencies = {
     {
       "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-live-grep-args.nvim",
       {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make"
@@ -24,7 +25,7 @@ return {
         }
       },
       -- https://www.reddit.com/r/neovim/comments/17j970c/telescope_live_grep_doesnt_escape_special/
-      vimgrep_arguments = table.insert(conf.vimgrep_arguments, '--fixed-strings'),
+      -- vimgrep_arguments = table.insert(conf.vimgrep_arguments, '--fixed-strings'),
       defaults = {
         file_ignore_patterns = {
           -- ".null-ls*",

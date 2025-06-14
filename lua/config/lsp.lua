@@ -33,6 +33,8 @@ vim.lsp.config("*", {
 
 local lsp_servers = {
   "astro",
+  "rust_analyzer",
+  "clangd",
   -- "cssls",
   -- "docker_compose_language_service",
   -- "dockerls",
@@ -44,6 +46,8 @@ local lsp_servers = {
   "tailwindcss",
   "templ",
   "ts_ls",
+  -- "dartls",
+  "zls",
 }
 
 require("mason-lspconfig").setup {
