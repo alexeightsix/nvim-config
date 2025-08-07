@@ -36,12 +36,37 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.lsp.buf.rename()
     end)
 
+
+    local function organizeImports()
+      local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding())
+      params.context = { only = { "source.organizeImports" } }
+      local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 3000)
+      for _, res in pairs(result or {}) do
+        for _, r in pairs(res.result or {}) do
+          if r.kind == "source.organizeImports" then
+            if r.edit then
+              vim.lsp.util.apply_workspace_edit(r.edit, vim.lsp.util._get_offset_encoding())
+            else
+              print(r.command)
+              vim.lsp.buf.execute_command(r.command)
+            end
+          end
+        end
+      end
+    end
+
     vim.keymap.set("n", "<leader>fd", function()
       require("conform").format(
         {
           lsp_format = "fallback",
           async = true
         })
+
+      local ft = vim.api.nvim_buf_get_option(0, "filetype")
+
+      if ft == "go" then
+        organizeImports()
+      end
     end)
 
     vim.keymap.set("n", "<leader>ca", function()
@@ -179,7 +204,7 @@ end)
 
 vim.keymap.set("n", "<leader>fw", function()
   extensions.live_grep_args.live_grep_args({
-    initial_mode = "normal",
+    initial_mode = "insert",
   })
 end)
 
@@ -212,10 +237,13 @@ vim.api.nvim_set_keymap("i", "<C-Right>", 'copilot#Accept("<CR>")', { silent = t
 
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 
-vim.keymap.set('n', '<leader>r', '<cmd>lua require("spectre").toggle()<CR>')
-vim.keymap.set('n', '<leader>r', function()
-  require("spectre").toggle()
-end, { desc = "Replace in files" })
+vim.keymap.set("n", "<leader>rw", function()
+  require('grug-far').toggle_instance({
+    instanceName = "far",
+    staticTitle = "Find and Replace",
+    startInInsertMode = false,
+  })
+end)
 
 vim.cmd([[
   command! W write
@@ -231,4 +259,27 @@ vim.keymap.set("n", "<leader>ba", function()
   local current_file = vim.fn.expand("%:p")
   vim.notify("+ " .. current_file)
 end)
-vim.keymap.set("n", "<leader>fb", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+vim.keymap.set("n", "<leader>bd", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+local conf = require("telescope.config").values
+local function toggle_telescope(harpoon_files)
+  local file_paths = {}
+  for _, item in ipairs(harpoon_files.items) do
+    table.insert(file_paths, item.value)
+  end
+
+  require("telescope.pickers").new({}, {
+    prompt_title = "Harpoon",
+    finder = require("telescope.finders").new_table({
+      results = file_paths,
+    }),
+    initial_mode = "normal",
+    previewer = conf.file_previewer({}),
+    sorter = conf.generic_sorter({}),
+  }):find()
+end
+
+vim.keymap.set("n", "<leader>fb", function() toggle_telescope(harpoon:list()) end)
+
+vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })

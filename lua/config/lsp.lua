@@ -32,26 +32,33 @@ vim.lsp.config("*", {
 })
 
 local lsp_servers = {
-  "astro",
-  "rust_analyzer",
-  "clangd",
-  -- "cssls",
-  -- "docker_compose_language_service",
-  -- "dockerls",
   "eslint",
   "gopls",
   "intelephense",
-  -- "pyright",
   "lua_ls",
   "tailwindcss",
   "templ",
   "ts_ls",
-  -- "dartls",
-  "zls",
+  "rnix",
+  -- "astro",
+  -- "rust_analyzer",
+  -- "clangd",
+  -- "cssls",
+  -- "docker_compose_language_service",
+  -- "dockerls",
+  -- "golangci_lint_ls",
+  -- "pyright",
+  -- "ruby_lsp",
+  -- "zls",
 }
 
 require("mason-lspconfig").setup {
   ensure_installed = lsp_servers,
 }
 
-vim.lsp.enable(lsp_servers)
+-- require("lspconfig").lua_ls.setup(
+--   {settings = {
+--     diagnostics = {globals = { "vim"}}}
+--
+-- vim.lsp.enable("luals")
+-- vim.lsp.enable("gopls")
