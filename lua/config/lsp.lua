@@ -39,14 +39,13 @@ local lsp_servers = {
   "tailwindcss",
   "templ",
   "ts_ls",
-  "rnix",
+  "docker_compose_language_service",
+  "dockerls",
   -- "astro",
   -- "rust_analyzer",
   -- "clangd",
   -- "cssls",
-  -- "docker_compose_language_service",
-  -- "dockerls",
-  -- "golangci_lint_ls",
+  "golangci_lint_ls",
   -- "pyright",
   -- "ruby_lsp",
   -- "zls",
@@ -56,9 +55,17 @@ require("mason-lspconfig").setup {
   ensure_installed = lsp_servers,
 }
 
--- require("lspconfig").lua_ls.setup(
---   {settings = {
---     diagnostics = {globals = { "vim"}}}
---
--- vim.lsp.enable("luals")
--- vim.lsp.enable("gopls")
+local navic = require("nvim-navic")
+local on_attach = function(client, bufnr)
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
+end
+
+require("lspconfig").ts_ls.setup {
+  on_attach = on_attach
+}
+
+require("lspconfig").gopls.setup {
+  on_attach = on_attach
+}

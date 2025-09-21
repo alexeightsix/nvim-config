@@ -53,8 +53,11 @@ vim.diagnostic.config({
 
 
 vim.g.loaded_netrwPlugin = 0
-vim.api.nvim_set_hl(0, "GitConflictCurrent", { bg = "#4a8c89", fg = "#e0e0e0" })
-vim.api.nvim_set_hl(0, "GitConflictIncoming", { bg = "#4a7bb5", fg = "#e0e0e0" })
-vim.api.nvim_set_hl(0, "GitConflictAncestor", { bg = "#b0b0b0", fg = "#333333" })
-vim.api.nvim_set_hl(0, "GitConflictCurrentLabel", { fg = "#e0e0e0", bg = "#4a8c89", bold = true })
-vim.api.nvim_set_hl(0, "GitConflictIncomingLabel", { fg = "#e0e0e0", bg = "#4a7bb5", bold = true })
+
+
+vim.api.nvim_set_hl(0, "GitConflictCurrent",  { bg = "#2e5049", fg = "#ffffff" }) -- dark teal bg, white text
+vim.api.nvim_set_hl(0, "GitConflictIncoming", { bg = "#2e3f5e", fg = "#ffffff" }) -- dark blue bg, white text
+vim.api.nvim_set_hl(0, "GitConflictAncestor", { bg = "#444444", fg = "#f0f0f0" }) -- neutral gray bg, light text
+
+vim.api.nvim_set_hl(0, "GitConflictCurrentLabel",  { fg = "#ffffff", bg = "#3a6f68", bold = true }) -- brighter teal label
+vim.api.nvim_set_hl(0, "GitConflictIncomingLabel", { fg = "#ffffff", bg = "#35548a", bold = true }) -- brighter blue label

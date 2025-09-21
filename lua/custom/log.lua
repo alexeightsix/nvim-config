@@ -55,6 +55,7 @@ end
 M.defaults = {
   ["go"] = M.handle_go,
   ["tsx"] = M.handle_tsx,
+  ["ts"] = M.handle_tsx,
   ["jsx"] = M.handle_tsx,
   ["php"] = M.handle_php,
 }

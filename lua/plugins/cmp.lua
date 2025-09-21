@@ -15,6 +15,45 @@ return {
     end
 
     cmp.setup({
+      sorting = {
+        priority_weight = 2,
+        comparators = {
+          -- Custom comparator: field > function
+          function(entry1, entry2)
+            local kind1 = entry1:get_kind() or 0
+            local kind2 = entry2:get_kind() or 0
+
+            local lsp = require('vim.lsp.protocol')
+            -- Define priorities: lower number = higher priority
+            local priority = {
+              [lsp.CompletionItemKind.Field] = 1,
+              [lsp.CompletionItemKind.Property] = 1,
+              [lsp.CompletionItemKind.Function] = 2,
+              [lsp.CompletionItemKind.Method] = 2,
+            }
+
+            local p1 = priority[kind1] or 99
+            local p2 = priority[kind2] or 99
+
+            if p1 < p2 then
+              return true
+            elseif p1 > p2 then
+              return false
+            end
+          end,
+
+          -- Keep the default ones after
+          cmp.config.compare.offset,
+          cmp.config.compare.exact,
+          cmp.config.compare.score,
+          cmp.config.compare.recently_used,
+          cmp.config.compare.locality,
+          cmp.config.compare.kind,
+          cmp.config.compare.sort_text,
+          cmp.config.compare.length,
+          cmp.config.compare.order,
+        },
+      },
       window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
