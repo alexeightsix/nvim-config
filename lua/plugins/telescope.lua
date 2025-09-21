@@ -13,8 +13,6 @@ return {
     }
   },
   config = function()
-    local conf = require('telescope.config').values
-
     require("telescope").setup({
       extensions = {
         fzf = {
@@ -29,7 +27,7 @@ return {
       defaults = {
         file_ignore_patterns = {
           -- ".null-ls*",
-          "*.sql",
+          "./database/dumps/.*.sql",
           ".git/.*",
           ".min.js",
           ".min.mjs",
@@ -41,6 +39,8 @@ return {
           "public/vendor/.*",
           "yarn.lock",
           "cmd/api/docs/.*",
+          "schema.d.ts",
+          "openapi/.*",
         },
         preview = {
           filesize_limit = 0.5555,

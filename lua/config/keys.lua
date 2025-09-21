@@ -56,11 +56,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     vim.keymap.set("n", "<leader>fd", function()
-      require("conform").format(
-        {
+      require("conform").format({
           lsp_format = "fallback",
           async = true
-        })
+       })
 
       local ft = vim.api.nvim_buf_get_option(0, "filetype")
 
@@ -135,12 +134,6 @@ vim.keymap.set("n", "<leader>ff", function()
   else
     telescope.find_files()
   end
-end)
-
-vim.keymap.set("n", "<leader>tt", function()
-  require("trouble").toggle({
-    position = "right",
-  })
 end)
 
 vim.keymap.set("n", "<leader>rg", function()

@@ -1,29 +1,24 @@
-local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-  opts = opts or {}
-  opts.border = {
-    { "╭", "FloatBorder" },
-    { "─", "FloatBorder" },
-    { "╮", "FloatBorder" },
-    { "│", "FloatBorder" },
-    { "╯", "FloatBorder" },
-    { "─", "FloatBorder" },
-    { "╰", "FloatBorder" },
-    { "│", "FloatBorder" },
-  }
-  opts.pad_top = 0.1
-  opts.pad_bottom = 0.1
-  return orig_util_open_floating_preview(contents, syntax, opts, ...)
-end
-
 local handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover),
   ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help),
 }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
+capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities({}, false))
+capabilities = vim.tbl_deep_extend('force', capabilities, {
+  textDocument = {
+    completion = {
+      completionItem = {
+        snippetSupport = false,
+      }
+    },
+    foldingRange = {
+      dynamicRegistration = false,
+      lineFoldingOnly = true
+    }
+  }
+})
 
 vim.lsp.config("*", {
   capabilities = capabilities,
@@ -32,33 +27,49 @@ vim.lsp.config("*", {
 })
 
 local lsp_servers = {
-  "eslint",
-  "gopls",
-  "intelephense",
-  "lua_ls",
-  "tailwindcss",
-  "templ",
-  "ts_ls",
-  "rnix",
-  -- "astro",
-  -- "rust_analyzer",
-  -- "clangd",
-  -- "cssls",
-  -- "docker_compose_language_service",
-  -- "dockerls",
-  -- "golangci_lint_ls",
-  -- "pyright",
-  -- "ruby_lsp",
-  -- "zls",
+  astro = { enabled = false },
+  clangd = { enabled = false },
+  cssls = { enabled = false },
+  docker_compose_language_service = { enabled = true },
+  dockerls = { enabled = true },
+  eslint = { enabled = true },
+  golangci_lint_ls = { enabled = true },
+  gopls = { enabled = true },
+  intelephense = { enabled = true },
+  lua_ls = { enabled = true },
+  pyright = { enabled = false },
+  ruby_lsp = { enabled = false },
+  rust_analyzer = { enabled = false },
+  tailwindcss = { enabled = true },
+  templ = { enabled = true },
+  ts_ls = { enabled = true },
+  zls = { enabled = false },
 }
+
+local enabled_lsp_servers = {}
+
+for name, opts in pairs(lsp_servers) do
+  if opts.enabled then
+    table.insert(enabled_lsp_servers, name)
+  end
+end
 
 require("mason-lspconfig").setup {
-  ensure_installed = lsp_servers,
+  ensure_installed = enabled_lsp_servers,
 }
 
--- require("lspconfig").lua_ls.setup(
---   {settings = {
---     diagnostics = {globals = { "vim"}}}
---
--- vim.lsp.enable("luals")
--- vim.lsp.enable("gopls")
+local navic = require("nvim-navic")
+local on_attach = function(client, bufnr)
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
+end
+
+vim.lsp.config("ts_ls", {
+  on_attach = on_attach,
+})
+
+
+vim.lsp.config("gopls", {
+  on_attach = on_attach,
+})

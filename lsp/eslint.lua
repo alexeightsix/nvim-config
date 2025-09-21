@@ -48,6 +48,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
+local function get_workspace_folder()
+  local root = vim.fn.getcwd()
+  return {
+    name = vim.fn.fnamemodify(root, ":t"),
+    uri = vim.uri_from_fname(root),
+  }
+end
+
 return {
   cmd = { utils.mason_path("vscode-eslint-language-server"), "--stdio" },
   filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
@@ -87,6 +95,6 @@ return {
     useESLintClass = false,
     validate = "on",
     workingDirectory = { mode = "location" },
-    workspaceFolder = utils.get_workspace_folder(),
+    workspaceFolder = get_workspace_folder(),
   }
 }
