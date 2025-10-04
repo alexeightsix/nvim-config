@@ -62,10 +62,11 @@ local on_attach = function(client, bufnr)
   end
 end
 
-require("lspconfig").ts_ls.setup {
-  on_attach = on_attach
-}
+vim.lsp.config("ts_ls", {
+  on_attach = on_attach,
+})
 
-require("lspconfig").gopls.setup {
-  on_attach = on_attach
-}
+
+vim.lsp.config("gopls", {
+  on_attach = on_attach,
+})

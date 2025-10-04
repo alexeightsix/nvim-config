@@ -1,3 +1,8 @@
+-- return {
+--   "christoomey/vim-tmux-navigator",
+-- }
+
 return {
-  "christoomey/vim-tmux-navigator",
+  "mrjones2014/smart-splits.nvim",
+  lazy = false, 
 }
