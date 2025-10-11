@@ -26,7 +26,6 @@ return {
       -- vimgrep_arguments = table.insert(conf.vimgrep_arguments, '--fixed-strings'),
       defaults = {
         file_ignore_patterns = {
-          -- ".null-ls*",
           "./database/dumps/.*.sql",
           ".git/.*",
           ".min.js",

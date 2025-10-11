@@ -1,22 +1,3 @@
-local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-  opts = opts or {}
-  opts.border = {
-    { "╭", "FloatBorder" },
-    { "─", "FloatBorder" },
-    { "╮", "FloatBorder" },
-    { "│", "FloatBorder" },
-    { "╯", "FloatBorder" },
-    { "─", "FloatBorder" },
-    { "╰", "FloatBorder" },
-    { "│", "FloatBorder" },
-  }
-  opts.pad_top = 0.1
-  opts.pad_bottom = 0.1
-  return orig_util_open_floating_preview(contents, syntax, opts, ...)
-end
-
 local handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover),
   ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help),
@@ -32,23 +13,21 @@ vim.lsp.config("*", {
 })
 
 local lsp_servers = {
+  "astro",
+  "cssls",
+  "docker_compose_language_service",
+  "dockerls",
   "eslint",
+  "golangci_lint_ls",
   "gopls",
   "intelephense",
   "lua_ls",
+  "pyright",
+  "rust_analyzer",
   "tailwindcss",
   "templ",
   "ts_ls",
-  "docker_compose_language_service",
-  "dockerls",
-  -- "astro",
-  -- "rust_analyzer",
-  -- "clangd",
-  -- "cssls",
-  "golangci_lint_ls",
-  -- "pyright",
-  -- "ruby_lsp",
-  -- "zls",
+  "zls",
 }
 
 require("mason-lspconfig").setup {
