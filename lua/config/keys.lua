@@ -57,9 +57,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     vim.keymap.set("n", "<leader>fd", function()
       require("conform").format({
-          lsp_format = "fallback",
-          async = true
-       })
+        lsp_format = "fallback",
+        async = true
+      })
 
       local ft = vim.api.nvim_buf_get_option(0, "filetype")
 
@@ -226,8 +226,7 @@ vim.keymap.set("n", "<leader>nc", function()
   vim.cmd("e init.lua")
 end)
 
--- vim.api.nvim_set_keymap("i", "<C-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
--- vim.api.nvim_set_keymap("i", "<C-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+vim.api.nvim_set_keymap("i", "<C-Right>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 
@@ -243,37 +242,3 @@ vim.cmd([[
   command! W write
   command! Bd bdelete
 ]])
-
-local harpoon = require("harpoon")
-local harpoon_extensions = require("harpoon.extensions")
-harpoon:setup()
-harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
-vim.keymap.set("n", "<leader>ba", function()
-  harpoon:list():add()
-  local current_file = vim.fn.expand("%:p")
-  vim.notify("+ " .. current_file)
-end)
-
-vim.keymap.set("n", "<leader>bd", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-
-local conf = require("telescope.config").values
-local function toggle_telescope(harpoon_files)
-  local file_paths = {}
-  for _, item in ipairs(harpoon_files.items) do
-    table.insert(file_paths, item.value)
-  end
-
-  require("telescope.pickers").new({}, {
-    prompt_title = "Harpoon",
-    finder = require("telescope.finders").new_table({
-      results = file_paths,
-    }),
-    initial_mode = "normal",
-    previewer = conf.file_previewer({}),
-    sorter = conf.generic_sorter({}),
-  }):find()
-end
-
-vim.keymap.set("n", "<leader>fb", function() toggle_telescope(harpoon:list()) end)
-
-vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })

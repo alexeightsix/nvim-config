@@ -20,6 +20,7 @@ local lsp_servers = {
   "eslint",
   "golangci_lint_ls",
   "gopls",
+  "clangd",
   "intelephense",
   "lua_ls",
   "pyright",
