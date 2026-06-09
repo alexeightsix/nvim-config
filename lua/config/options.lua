@@ -48,7 +48,7 @@ vim.diagnostic.config({
   jump = {
     float = false,
   },
-  update_in_insert = false,
+  update_in_insert = true,
 })
 
 

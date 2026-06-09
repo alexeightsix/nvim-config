@@ -35,7 +35,19 @@ require('lualine').setup {
   sections = {
     lualine_a = { '' },
     lualine_b = {},
-    lualine_c = { 'location', 'diagnostics', 'filename', {
+    lualine_c = { 'location', 'diagnostics', { 'filename', path = 2,
+      fmt = function(name)
+        local git_root = vim.fs.root(0, '.git')
+        if git_root then
+          local buf_path = vim.fn.expand('%:p')
+          if buf_path:sub(1, #git_root) == git_root then
+            local root_name = vim.fn.fnamemodify(git_root, ':t')
+            return root_name .. buf_path:sub(#git_root + 1)
+          end
+        end
+        return name
+      end,
+    }, {
       function()
         return navic.get_location()
       end,

@@ -1,9 +1,85 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
+capabilities.workspace = capabilities.workspace or {}
+capabilities.workspace.didChangeWatchedFiles = {
+  dynamicRegistration = true,
+  relativePatternSupport = true,
+}
+
 vim.lsp.config("*", {
   capabilities = capabilities,
   root_markers = { ".git" },
+})
+
+vim.lsp.config("ts_ls", {
+  root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
+  init_options = {
+    maxTsServerMemory = 8192,
+    preferences = {
+      includeCompletionsForModuleExports = true,
+      includeCompletionsForImportStatements = true,
+      includeCompletionsWithSnippetText = true,
+      includeAutomaticOptionalChainCompletions = true,
+      includeCompletionsWithInsertText = true,
+    },
+  },
+  settings = {
+    typescript = {
+      tsserver = { useSyntaxServer = "auto" },
+      suggest = { completeFunctionCalls = true },
+      inlayHints = {
+        includeInlayParameterNameHints = "literals",
+        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = false,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+      },
+    },
+    javascript = {
+      suggest = { completeFunctionCalls = true },
+      inlayHints = {
+        includeInlayParameterNameHints = "all",
+        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+      },
+    },
+  },
+})
+
+vim.lsp.config("gopls", {
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+        shadow = false,
+        nilness = true,
+        unusedwrite = true,
+        useany = true,
+        ST1000 = false,
+        ST1003 = false,
+      },
+      staticcheck = true,
+      gofumpt = true,
+      usePlaceholders = true,
+      completeUnimported = true,
+      semanticTokens = true,
+      directoryFilters = { "-**/node_modules", "-**/.git" },
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        constantValues = true,
+        parameterNames = true,
+        rangeVariableTypes = true,
+      },
+    },
+  },
 })
 
 local lsp_servers = {
