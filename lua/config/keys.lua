@@ -136,6 +136,10 @@ vim.keymap.set("n", "<leader>ff", function()
   end
 end)
 
+vim.keymap.set("n", "<leader>m", function() -- run a Makefile target
+  require("custom.make").pick()
+end)
+
 vim.keymap.set("n", "<leader>rg", function()
   telescope.registers({
     initial_mode = "normal",
