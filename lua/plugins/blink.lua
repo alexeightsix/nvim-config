@@ -59,7 +59,7 @@ return {
         documentation = cmp.config.window.bordered(),
       },
       mapping = cmp.mapping.preset.insert({
-        ["<C-k>"] = function(fallback)
+        ["<C-Up>"] = function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
           elseif has_words_before() then
@@ -68,7 +68,7 @@ return {
             fallback()
           end
         end,
-        ["<C-j>"] = function(fallback)
+        ["<C-Down>"] = function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
           elseif has_words_before() then
