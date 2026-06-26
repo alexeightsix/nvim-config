@@ -82,12 +82,27 @@ vim.lsp.config("gopls", {
   },
 })
 
+-- PHP language semantics. Anchor the root at the Laravel project (artisan)
+-- so a single workspace is indexed, and raise the file-size cap so large
+-- generated files (e.g. laravel-ide-helper output) still get indexed.
+vim.lsp.config("intelephense", {
+  root_markers = { "composer.json", "artisan", ".git" },
+  settings = {
+    intelephense = {
+      files = {
+        maxSize = 5000000,
+      },
+    },
+  },
+})
+
 local lsp_servers = {
   "cssls",
   "docker_compose_language_service",
   "dockerls",
   "eslint",
   "gopls",
+  "intelephense",
   "tailwindcss",
   "templ",
   "ts_ls",

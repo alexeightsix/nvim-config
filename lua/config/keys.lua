@@ -140,6 +140,11 @@ vim.keymap.set("n", "<leader>m", function() -- run a Makefile target
   require("custom.make").pick()
 end)
 
+vim.keymap.set("n", "<leader>c", function()
+  local path = vim.fn.expand("%:p") .. ":" .. vim.fn.line(".")
+  vim.fn.setreg("+", path)
+end)
+
 vim.keymap.set("n", "<leader>rg", function()
   telescope.registers({
     initial_mode = "normal",
